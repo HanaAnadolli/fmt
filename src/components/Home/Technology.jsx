@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 
 import icon1 from "../../assets/home/icon1.svg"
 import icon2 from "../../assets/home/icon2.svg"
@@ -47,8 +47,6 @@ const ITEMS = [
   },
 ]
 
-const PAGE_SIZE = 3
-
 function clamp2Style() {
   return {
     display: "-webkit-box",
@@ -57,33 +55,78 @@ function clamp2Style() {
   }
 }
 
+// simple responsive hook (no libs)
+function useIsMdUp() {
+  const [isMdUp, setIsMdUp] = useState(() =>
+    typeof window === "undefined" ? true : window.matchMedia("(min-width: 768px)").matches
+  )
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)")
+    const onChange = () => setIsMdUp(mq.matches)
+
+    // Safari support
+    if (mq.addEventListener) mq.addEventListener("change", onChange)
+    else mq.addListener(onChange)
+
+    setIsMdUp(mq.matches)
+
+    return () => {
+      if (mq.removeEventListener) mq.removeEventListener("change", onChange)
+      else mq.removeListener(onChange)
+    }
+  }, [])
+
+  return isMdUp
+}
+
 export default function Technology() {
+  const isMdUp = useIsMdUp()
+  const pageSize = isMdUp ? 3 : 1
+
   const [page, setPage] = useState(0)
-  const totalPages = Math.ceil(ITEMS.length / PAGE_SIZE)
-  const start = page * PAGE_SIZE
-  const visibleItems = ITEMS.slice(start, start + PAGE_SIZE)
+
+  const totalPages = useMemo(
+    () => Math.ceil(ITEMS.length / pageSize),
+    [pageSize]
+  )
+
+  // keep page valid when pageSize changes (mobile <-> desktop)
+  useEffect(() => {
+    setPage((p) => Math.min(p, totalPages - 1))
+  }, [totalPages])
+
+  const start = page * pageSize
+  const visibleItems = ITEMS.slice(start, start + pageSize)
+
+  const canPrev = page > 0
+  const canNext = page < totalPages - 1
 
   return (
-    <section className="w-full py-20" style={{ backgroundColor: '#E4E4E4' }}>
-      <div className="mx-auto max-w-7xl px-10">
-        <div className="flex items-start justify-between gap-10">
+    <section className="w-full py-14 sm:py-20" style={{ backgroundColor: "#E4E4E4" }}>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
+        {/* Header row */}
+        <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between md:gap-10">
           <div className="max-w-3xl">
-            <h2 className="text-5xl font-extrabold tracking-tight text-primary">
+            <h2 className="text-3xl font-extrabold tracking-tight text-primary sm:text-4xl lg:text-5xl">
               Technology
             </h2>
-            <p className="mt-4 max-w-3xl text-[18px] leading-7 text-slate-800/90">
-              A financial analysis tool powered by artificial intelligence, designed to streamline, automate,
-              and elevate the entire financial analysis process.
+            <p className="mt-4 max-w-3xl text-[15px] leading-7 text-slate-800/90 sm:text-[18px]">
+              A financial analysis tool powered by artificial intelligence, designed to streamline,
+              automate, and elevate the entire financial analysis process.
             </p>
           </div>
 
-          <div className="mt-2 flex items-center gap-3">
+          {/* Arrows (fixed) */}
+          <div className="flex items-center gap-3 md:mt-2 md:self-start">
             <button
               type="button"
-              onClick={() => setPage((p) => p - 1)}
+              onClick={() => setPage((p) => Math.max(0, p - 1))}
+              disabled={!canPrev}
               className={[
                 "grid h-11 w-11 place-items-center rounded-lg bg-primary text-white shadow-sm",
-                page === 0 ? "invisible pointer-events-none" : "visible",
+                "transition-opacity active:scale-[0.98]",
+                !canPrev ? "opacity-40 cursor-not-allowed" : "hover:opacity-90",
               ].join(" ")}
               aria-label="Previous"
             >
@@ -92,10 +135,12 @@ export default function Technology() {
 
             <button
               type="button"
-              onClick={() => setPage((p) => p + 1)}
+              onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
+              disabled={!canNext}
               className={[
                 "grid h-11 w-11 place-items-center rounded-lg bg-primary text-white shadow-sm",
-                page === totalPages - 1 ? "invisible pointer-events-none" : "visible",
+                "transition-opacity active:scale-[0.98]",
+                !canNext ? "opacity-40 cursor-not-allowed" : "hover:opacity-90",
               ].join(" ")}
               aria-label="Next"
             >
@@ -104,32 +149,33 @@ export default function Technology() {
           </div>
         </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-8 md:grid-cols-3">
+        {/* Cards */}
+        <div className={`mt-10 sm:mt-14 grid gap-6 ${isMdUp ? "md:grid-cols-3" : "grid-cols-1"}`}>
           {visibleItems.map((item) => (
             <div
               key={item.id}
-              className="
-                flex items-center gap-7
-                rounded-[26px] bg-white
-                px-10 py-8
-                shadow-[0_10px_30px_rgba(0,0,0,0.06)]
-                transition-colors duration-200
-                hover:bg-[#36A8DF33]
-                h-[150px]
-              "
+              className={[
+                "flex items-center gap-5 sm:gap-7",
+                "rounded-[26px] bg-white",
+                "px-6 sm:px-10 py-7 sm:py-8",
+                "shadow-[0_10px_30px_rgba(0,0,0,0.06)]",
+                "transition-colors duration-200 hover:bg-[#36A8DF33]",
+                // ✅ on mobile let height be natural; on md+ keep your fixed height
+                isMdUp ? "h-[150px]" : "min-h-[130px]",
+              ].join(" ")}
             >
-              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-[#9fd2ef]">
+              <div className="flex h-14 w-14 sm:h-16 sm:w-16 shrink-0 items-center justify-center rounded-2xl bg-[#9fd2ef]">
                 <img
                   src={item.icon}
                   alt=""
                   className="h-[40px] w-[40px] max-h-[40px] max-w-[40px] flex-shrink-0 object-contain"
-                  style={{ minHeight: '40px', minWidth: '40px' }}
+                  style={{ minHeight: "40px", minWidth: "40px" }}
                   draggable={false}
                 />
               </div>
 
               <p
-                className="overflow-hidden text-[18px] font-semibold leading-7 text-slate-900"
+                className="overflow-hidden text-[16px] font-semibold leading-7 text-slate-900 sm:text-[18px]"
                 style={clamp2Style()}
               >
                 {item.title}
@@ -138,7 +184,8 @@ export default function Technology() {
           ))}
         </div>
 
-        <div className="mt-12 flex justify-center gap-4">
+        {/* Dots */}
+        <div className="mt-10 sm:mt-12 flex justify-center gap-3 sm:gap-4">
           {Array.from({ length: totalPages }).map((_, i) => (
             <button
               key={i}
@@ -146,7 +193,7 @@ export default function Technology() {
               onClick={() => setPage(i)}
               className={[
                 "h-[7px] rounded-full transition-all",
-                i === page ? "w-12 bg-primary" : "w-10 bg-slate-300/80",
+                i === page ? "w-10 sm:w-12 bg-primary" : "w-8 sm:w-10 bg-slate-300/80",
               ].join(" ")}
               aria-label={`Go to page ${i + 1}`}
             />

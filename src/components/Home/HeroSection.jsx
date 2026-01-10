@@ -32,15 +32,15 @@ export default function HeroSection() {
 
     // Calculate initial position
     calculateTargetPosition()
-    
+
     const t = setTimeout(() => {
       calculateTargetPosition()
       setPhase("move")
     }, HOLD_MS)
-    
+
     // Recalculate on resize
     window.addEventListener("resize", calculateTargetPosition)
-    
+
     return () => {
       clearTimeout(t)
       window.removeEventListener("resize", calculateTargetPosition)
@@ -60,10 +60,13 @@ export default function HeroSection() {
   const isMove = phase === "move"
 
   return (
-    <section className="relative min-h-[calc(100vh-86px)] overflow-hidden" style={{ backgroundColor: '#E4E4E4' }}>
-      <div className="relative mx-auto max-w-7xl px-8 pt-16 pb-20">
+    <section
+      className="relative min-h-[calc(100vh-86px)] overflow-hidden"
+      style={{ backgroundColor: "#E4E4E4" }}
+    >
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10 sm:pt-14 lg:pt-16 pb-16 sm:pb-20">
         {/* Layout grid (text left, diagram right) - 50/50 split */}
-        <div className="grid items-center gap-12 lg:grid-cols-2">
+        <div className="grid items-center gap-10 lg:gap-12 lg:grid-cols-2">
           {/* LEFT TEXT CONTENT (only appears after logo moves) */}
           <div
             className={[
@@ -76,7 +79,8 @@ export default function HeroSection() {
             </h1>
 
             <p className="mt-6 max-w-xl text-base leading-7 text-gray-700 sm:text-lg">
-              Financial Analysis powered by Artificial Intelligence - from data spreading to credit ratings and portfolio insights, all in one tool.
+              Financial Analysis powered by Artificial Intelligence - from data spreading to credit ratings
+              and portfolio insights, all in one tool.
             </p>
 
             <p className="mt-6 text-lg font-bold text-primary sm:text-xl">
@@ -91,10 +95,14 @@ export default function HeroSection() {
           </div>
 
           {/* RIGHT DIAGRAM COLUMN - fixed ovals and target for logo */}
-          <div ref={rightColumnRef} className="relative flex items-center justify-center lg:min-h-[500px]" id="diagram-target">
+          <div
+            ref={rightColumnRef}
+            className="relative flex items-center justify-center min-h-[420px] sm:min-h-[460px] lg:min-h-[500px]"
+            id="diagram-target"
+          >
             {/* Fixed surrounding images - fade in after logo moves */}
-            <div 
-              className={`relative h-[380px] w-[380px] transition-opacity duration-700 ${
+            <div
+              className={`diagram-stage relative transition-opacity duration-700 ${
                 isMove ? "opacity-100" : "opacity-0"
               }`}
             >
@@ -116,8 +124,8 @@ export default function HeroSection() {
                         src={item.image}
                         alt={item.text}
                         className={`h-auto w-auto object-contain drop-shadow-md ${
-                          item.text === "Customisable Rating Methodologies" 
-                            ? "max-w-[200px] min-w-[150px]" 
+                          item.text === "Customisable Rating Methodologies"
+                            ? "max-w-[200px] min-w-[150px]"
                             : "max-w-[140px]"
                         }`}
                         draggable="false"
@@ -133,21 +141,27 @@ export default function HeroSection() {
 
       {/* LOGO STAGE (absolute over the whole hero so it can start centered on screen, then moves to right column) */}
       <div
-        className={[
-          "logo-stage",
-          isMove ? "logo-stage--move" : "logo-stage--hold",
-        ].join(" ")}
-        style={isMove ? {
-          left: targetPosition.left,
-          top: targetPosition.top,
-        } : {}}
+        className={["logo-stage", isMove ? "logo-stage--move" : "logo-stage--hold"].join(" ")}
+        style={
+          isMove
+            ? {
+                left: targetPosition.left,
+                top: targetPosition.top,
+              }
+            : {}
+        }
       >
         {/* logo - moves from center to right column */}
-        <div className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ${isMove ? "logo-float" : "logo-hold"}`} style={{ zIndex: 1 }}>
+        <div
+          className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ${
+            isMove ? "logo-float" : "logo-hold"
+          }`}
+          style={{ zIndex: 1 }}
+        >
           <img
             src={fmtLogo}
             alt="FMT"
-            className="h-[180px] w-[180px] sm:h-[210px] sm:w-[210px] object-contain drop-shadow-sm"
+            className="logo-img object-contain drop-shadow-sm"
             draggable="false"
           />
         </div>
@@ -172,15 +186,26 @@ export default function HeroSection() {
         <span className="text-sm font-semibold">Chat</span>
       </button>
 
-      {/* Component-scoped CSS for "center -> right" animation */}
+      {/* Component-scoped CSS for "center -> right" animation + RESPONSIVE fixes */}
       <style>{`
+        /* Responsive stage size (used by both logo travel stage and diagram) */
+        :root{
+          --stage: clamp(260px, 70vw, 380px);
+        }
+
         /* The stage is always absolute so it can travel across the whole screen */
         .logo-stage{
           position: absolute;
-          width: 380px;
-          height: 380px;
+          width: var(--stage);
+          height: var(--stage);
           transition: transform 900ms cubic-bezier(.22,.8,.2,1);
           will-change: transform;
+        }
+
+        /* Diagram container uses same stage size */
+        .diagram-stage{
+          width: var(--stage);
+          height: var(--stage);
         }
 
         /* HOLD = perfectly centered on screen */
@@ -195,6 +220,28 @@ export default function HeroSection() {
         .logo-stage--move{
           translate: -50% -50%;
           transform: scale(1);
+        }
+
+        /* Make the fixed-distance (180px) ring fit on smaller screens by scaling
+           (logic untouched — we scale the whole diagram instead). */
+        @media (max-width: 1023px){
+          .diagram-stage{
+            transform: scale(0.9);
+            transform-origin: center;
+          }
+        }
+
+        @media (max-width: 640px){
+          .diagram-stage{
+            transform: scale(0.78);
+            transform-origin: center;
+          }
+        }
+
+        /* Responsive logo image size */
+        .logo-img{
+          width: clamp(140px, 40vw, 210px);
+          height: clamp(140px, 40vw, 210px);
         }
 
         /* Logo breathing while held */

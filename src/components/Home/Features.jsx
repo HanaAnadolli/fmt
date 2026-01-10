@@ -1,5 +1,5 @@
-import { useMemo, useState } from "react"
-import Vector from "../../assets/home/Vector.svg?react"
+import { useMemo, useState } from "react";
+import Vector from "../../assets/home/Vector.svg?react";
 
 const FEATURES = [
   {
@@ -98,30 +98,47 @@ const FEATURES = [
       "Protect sensitive data with differentiated views for internal and external users, dual approval workflows to minimise manual errors, and built-in task management to reduce operational risk.",
     imageSrc: "/src/assets/home/lorem.png",
   },
-]
+];
 
 function FeaturePill({ label, onClick }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className="group relative grid h-[120px] w-[240px] place-items-center text-center focus:outline-none"
+      className={[
+        "group relative grid place-items-center text-center focus:outline-none",
+        // responsive sizing (smaller on mobile)
+        "h-[88px] w-full",
+        "sm:h-[96px]",
+        "md:h-[104px]",
+        "lg:h-[112px]",
+        // keep pill from becoming too wide on big screens
+        "max-w-[220px] md:max-w-[240px]",
+        // center inside its grid cell
+        "justify-self-center",
+      ].join(" ")}
     >
       <Vector className="absolute inset-0 h-full w-full text-[#bfbfbf] transition-colors duration-200 group-hover:text-primary" />
-      <div className="relative z-10 px-4 text-[14px] font-semibold leading-tight text-white">
+      <div
+        className={[
+          "relative z-10 px-3 font-semibold leading-tight text-white",
+          "text-[12px] sm:text-[13px] md:text-[14px]",
+        ].join(" ")}
+      >
         {label.split("\n").map((line, i) => (
           <div key={i}>{line}</div>
         ))}
       </div>
     </button>
-  )
+  );
 }
 
 function Modal({ open, onClose, title, description, imageSrc }) {
   if (!open) return null
 
   return (
-    <div className="fixed inset-0 z-[60]">
+    <div className="fixed inset-0 z-60 flex items-center justify-center p-4">
+      {/* Backdrop */}
       <button
         type="button"
         aria-label="Close"
@@ -129,29 +146,56 @@ function Modal({ open, onClose, title, description, imageSrc }) {
         className="absolute inset-0 bg-black/70"
       />
 
-      <div className="absolute left-1/2 top-1/2 w-[92vw] max-w-5xl -translate-x-1/2 -translate-y-1/2 rounded-[28px] bg-white p-10 shadow-2xl">
+      {/* Modal */}
+      <div
+        className={[
+          "relative w-full",
+          // ✅ slightly bigger modal
+          "max-w-6xl",
+          "rounded-[26px] bg-white shadow-2xl",
+          "p-6 sm:p-10 lg:p-12",
+          "max-h-[92vh] overflow-y-auto",
+        ].join(" ")}
+      >
+        {/* Close */}
         <button
           type="button"
           onClick={onClose}
-          className="absolute right-6 top-5 text-xl text-slate-700 hover:text-slate-900"
+          className="absolute right-5 top-4 text-2xl text-slate-700 hover:text-slate-900"
           aria-label="Close modal"
         >
           ×
         </button>
 
-        <div className="grid items-center gap-10 lg:grid-cols-2">
+        <div className="grid items-center gap-8 lg:gap-14 lg:grid-cols-2">
+          {/* Text */}
           <div>
-            <h3 className="text-3xl font-extrabold text-primary">{title}</h3>
-            <p className="mt-5 text-sm leading-6 text-slate-700">{description}</p>
+            <h3 className="text-3xl font-extrabold text-primary">
+              {title}
+            </h3>
+            <p className="mt-5 text-base leading-7 text-slate-700">
+              {description}
+            </p>
           </div>
 
+          {/* Image */}
           <div className="flex justify-center lg:justify-end">
-            <div className="grid h-[220px] w-[360px] place-items-center rounded-2xl bg-slate-100">
+            <div
+              className={[
+                "w-full max-w-[520px]",
+                "rounded-3xl bg-slate-100",
+                "grid place-items-center",
+                // ✅ bigger container
+                "h-[220px] sm:h-[300px] lg:h-[360px]",
+                // padding so image never touches edges
+                "p-6 sm:p-8",
+              ].join(" ")}
+            >
               {imageSrc ? (
                 <img
                   src={imageSrc}
                   alt=""
-                  className="h-full w-full rounded-2xl object-contain"
+                  className="h-full w-full object-contain scale-[0.88]"
                   draggable={false}
                 />
               ) : (
@@ -167,27 +211,28 @@ function Modal({ open, onClose, title, description, imageSrc }) {
   )
 }
 
-export default function Features() {
-  const data = useMemo(() => FEATURES, [])
-  const [openKey, setOpenKey] = useState(null)
 
-  const active = data.find((x) => x.key === openKey) || null
+export default function Features() {
+  const data = useMemo(() => FEATURES, []);
+  const [openKey, setOpenKey] = useState(null);
+
+  const active = data.find((x) => x.key === openKey) || null;
 
   return (
-    <section className="relative w-full pt-28 pb-20">
-      <div className="mx-auto max-w-7xl px-6">
-        <h2 className="text-4xl font-extrabold text-primary">
+    <section className="relative w-full pt-20 sm:pt-24 lg:pt-28 pb-16 sm:pb-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <h2 className="text-3xl font-extrabold text-primary sm:text-4xl">
           FMT Features &amp; Capabilities
         </h2>
 
-        <p className="mt-3 max-w-5xl text-[14px] leading-5 text-slate-700">
-          FMT delivers a powerful suite of features designed to enhance accuracy,
-          efficiency, and flexibility in financial and credit risk analysis.
-          Every functionality is built to support customisation for each client
-          while streamlining critical workflows.
+        <p className="mt-3 max-w-5xl text-[13px] leading-5 text-slate-700 sm:text-[14px]">
+          FMT delivers a powerful suite of features designed to enhance
+          accuracy, efficiency, and flexibility in financial and credit risk
+          analysis. Every functionality is built to support customisation for
+          each client while streamlining critical workflows.
         </p>
 
-        <div className="mt-16 grid grid-cols-2 gap-10 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+        <div className="mt-10 sm:mt-14 lg:mt-16 grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
           {data.map((item) => (
             <FeaturePill
               key={item.key}
@@ -206,5 +251,5 @@ export default function Features() {
         imageSrc={active?.imageSrc ?? ""}
       />
     </section>
-  )
+  );
 }
