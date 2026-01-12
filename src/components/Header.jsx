@@ -33,7 +33,7 @@ export default function Header() {
     return () => window.removeEventListener("keydown", onKey)
   }, [])
 
-  const base = "px-2 py-2 text-[18px] font-semibold relative group"
+  const base = "px-3 py-2 text-[19px] font-semibold relative group"
   const active = "text-primary"
   const inactive = "text-slate-700 hover:text-primary"
 
@@ -64,19 +64,19 @@ export default function Header() {
       }`}
       style={{ backgroundColor: "#E4E4E4" }}
     >
-      <div className="mx-auto flex h-[86px] max-w-7xl items-center px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-[110px] max-w-7xl items-center px-6 sm:px-8 lg:px-10">
         {/* Logo */}
         <NavLink to="/" className="flex items-center">
           <img
             src={fmtLogo}
             alt="FMT Logo"
-            className="h-auto w-24 select-none"
+            className="select-none w-[120px] sm:w-[140px] h-auto"
             draggable={false}
           />
         </NavLink>
 
         {/* Desktop nav */}
-        <nav className="ml-auto hidden items-center gap-10 md:flex">
+        <nav className="ml-auto hidden items-center gap-12 md:flex">
           <Item to="/" label="Home" end />
           <Item to="/about" label="About Us" />
           <Item to="/news" label="Views & News" />
@@ -87,12 +87,12 @@ export default function Header() {
         <button
           aria-label="Open menu"
           onClick={() => setMenuOpen(true)}
-          className="ml-auto rounded-md p-2 text-slate-700 hover:text-primary md:hidden"
+          className="ml-auto rounded-md p-3 text-slate-700 hover:text-primary md:hidden"
         >
-          <span className="block h-5 w-6 relative">
-            <span className="absolute top-0 left-0 h-[2px] w-6 bg-current" />
-            <span className="absolute top-[9px] left-0 h-[2px] w-6 bg-current" />
-            <span className="absolute top-[18px] left-0 h-[2px] w-6 bg-current" />
+          <span className="relative block h-6 w-7">
+            <span className="absolute top-0 left-0 h-[2px] w-7 bg-current" />
+            <span className="absolute top-[11px] left-0 h-[2px] w-7 bg-current" />
+            <span className="absolute top-[22px] left-0 h-[2px] w-7 bg-current" />
           </span>
         </button>
       </div>
@@ -119,18 +119,13 @@ export default function Header() {
         >
           <div className="flex h-full flex-col">
             {/* Top bar */}
-            <div className="flex justify-end px-5 py-4">
+            <div className="flex justify-end px-6 py-5">
               <button
                 aria-label="Close menu"
                 onClick={() => setMenuOpen(false)}
-                className="h-10 w-10 flex items-center justify-center rounded-full text-slate-700 hover:text-primary"
+                className="flex h-11 w-11 items-center justify-center rounded-full text-slate-700 hover:text-primary"
               >
-                <svg
-                  width="22"
-                  height="22"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                >
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
                   <path
                     d="M6 6L18 18M18 6L6 18"
                     stroke="currentColor"
@@ -142,7 +137,7 @@ export default function Header() {
             </div>
 
             {/* Links */}
-            <nav className="flex flex-col gap-5 px-6 pt-6">
+            <nav className="flex flex-col gap-6 px-8 pt-6">
               <Item to="/" label="Home" end onClick={() => setMenuOpen(false)} />
               <Item to="/about" label="About Us" onClick={() => setMenuOpen(false)} />
               <Item to="/news" label="Views & News" onClick={() => setMenuOpen(false)} />

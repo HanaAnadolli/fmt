@@ -1,5 +1,5 @@
 // src/components/Home/HeroSection.jsx
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import fmtLogo from "../../assets/fmt.png"
 import financialAnalysisImg from "../../assets/home/financial-analysis.png"
 import portfolioManagementImg from "../../assets/home/portfolio-management.png"
@@ -9,65 +9,87 @@ import liquidityImg from "../../assets/home/liquidity.png"
 import financialsSpreadingImg from "../../assets/home/financials-sreading.png"
 
 export default function HeroSection() {
-  const [phase, setPhase] = useState("hold") // "hold" -> "move"
-  const [targetPosition, setTargetPosition] = useState({ left: "50%", top: "50%" })
-  const rightColumnRef = useRef(null)
+  // phases:
+  // hold: overlay centered
+  // move: overlay moves to target
+  // done: overlay hidden, real logo shown
+  const [phase, setPhase] = useState("hold")
+  const [delta, setDelta] = useState({ x: 0, y: 0 })
 
-  // how long it stays centered before moving
+  const sectionRef = useRef(null)
+  const targetRef = useRef(null)
+
   const HOLD_MS = 1500
+  const MOVE_MS = 900
+
+  const diagramItems = useMemo(
+    () => [
+      { text: "Financial Analysis", image: financialAnalysisImg, angle: -90, distance: 180 }, // Top
+      { text: "Portfolio Management", image: portfolioManagementImg, angle: -30, distance: 180 }, // Top-right
+      { text: "Reporting", image: reportingImg, angle: 30, distance: 180 }, // Bottom-right
+      { text: "Customisable Rating Methodologies", image: ratingMethodologiesImg, angle: 90, distance: 180 }, // Bottom
+      { text: "Liquidity Assessment & Financial Modelling", image: liquidityImg, angle: 150, distance: 180 }, // Bottom-left
+      { text: "Financials Spreading", image: financialsSpreadingImg, angle: -150, distance: 180 }, // Top-left
+    ],
+    []
+  )
+
+  const isMove = phase === "move" || phase === "done"
+  const showRealLogo = phase === "done"
+  const showOverlay = phase !== "done"
+
+  const computeDeltaToTarget = () => {
+    if (!targetRef.current) return
+
+    const targetRect = targetRef.current.getBoundingClientRect()
+    const targetCx = targetRect.left + targetRect.width / 2
+    const targetCy = targetRect.top + targetRect.height / 2
+
+    const viewportCx = window.innerWidth / 2
+    const viewportCy = window.innerHeight / 2
+
+    setDelta({ x: targetCx - viewportCx, y: targetCy - viewportCy })
+  }
 
   useEffect(() => {
-    const calculateTargetPosition = () => {
-      if (rightColumnRef.current) {
-        const rect = rightColumnRef.current.getBoundingClientRect()
-        const sectionRect = rightColumnRef.current.closest("section")?.getBoundingClientRect()
-        if (sectionRect) {
-          // Calculate position relative to section
-          const left = ((rect.left + rect.width / 2 - sectionRect.left) / sectionRect.width) * 100
-          const top = ((rect.top + rect.height / 2 - sectionRect.top) / sectionRect.height) * 100
-          setTargetPosition({ left: `${left}%`, top: `${top}%` })
-        }
-      }
-    }
+    // ensure we have correct delta on first render
+    computeDeltaToTarget()
 
-    // Calculate initial position
-    calculateTargetPosition()
+    const onResize = () => {
+      // keep target correct if user resizes during hold
+      if (phase === "hold") computeDeltaToTarget()
+    }
+    window.addEventListener("resize", onResize)
 
     const t = setTimeout(() => {
-      calculateTargetPosition()
-      setPhase("move")
+      // recalc right before move (fonts/layout settled)
+      computeDeltaToTarget()
+      requestAnimationFrame(() => setPhase("move"))
     }, HOLD_MS)
-
-    // Recalculate on resize
-    window.addEventListener("resize", calculateTargetPosition)
 
     return () => {
       clearTimeout(t)
-      window.removeEventListener("resize", calculateTargetPosition)
+      window.removeEventListener("resize", onResize)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  // The 6 surrounding items with their positions (angles in degrees, 0 = top)
-  const diagramItems = [
-    { text: "Financial Analysis", image: financialAnalysisImg, angle: -90, distance: 180 }, // Top
-    { text: "Portfolio Management", image: portfolioManagementImg, angle: -30, distance: 180 }, // Top-right
-    { text: "Reporting", image: reportingImg, angle: 30, distance: 180 }, // Bottom-right
-    { text: "Customisable Rating Methodologies", image: ratingMethodologiesImg, angle: 90, distance: 180 }, // Bottom
-    { text: "Liquidity Assessment & Financial Modelling", image: liquidityImg, angle: 150, distance: 180 }, // Bottom-left
-    { text: "Financials Spreading", image: financialsSpreadingImg, angle: -150, distance: 180 }, // Top-left
-  ]
-
-  const isMove = phase === "move"
+  useEffect(() => {
+    if (phase !== "move") return
+    const t = setTimeout(() => setPhase("done"), MOVE_MS)
+    return () => clearTimeout(t)
+  }, [phase])
 
   return (
     <section
+      ref={sectionRef}
       className="relative min-h-[calc(100vh-86px)] overflow-hidden"
       style={{ backgroundColor: "#E4E4E4" }}
     >
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10 sm:pt-14 lg:pt-16 pb-16 sm:pb-20">
-        {/* Layout grid (text left, diagram right) - 50/50 split */}
+        {/* Layout grid (text left, diagram right) */}
         <div className="grid items-center gap-10 lg:gap-12 lg:grid-cols-2">
-          {/* LEFT TEXT CONTENT (only appears after logo moves) */}
+          {/* LEFT TEXT CONTENT (appears after move starts) */}
           <div
             className={[
               "transition-all duration-700 ease-out",
@@ -94,13 +116,9 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* RIGHT DIAGRAM COLUMN - fixed ovals and target for logo */}
-          <div
-            ref={rightColumnRef}
-            className="relative flex items-center justify-center min-h-[420px] sm:min-h-[460px] lg:min-h-[500px]"
-            id="diagram-target"
-          >
-            {/* Fixed surrounding images - fade in after logo moves */}
+          {/* RIGHT DIAGRAM COLUMN */}
+          <div className="relative flex items-center justify-center min-h-[420px] sm:min-h-[460px] lg:min-h-[500px]">
+            {/* Surrounding images (fade in after move starts) */}
             <div
               className={`diagram-stage relative transition-opacity duration-700 ${
                 isMove ? "opacity-100" : "opacity-0"
@@ -134,76 +152,69 @@ export default function HeroSection() {
                   </div>
                 )
               })}
+
+              {/* ✅ REAL LOGO (stays where it belongs, in the diagram center) */}
+              <div
+                ref={targetRef}
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[6] pointer-events-none"
+                style={{
+                  opacity: showRealLogo ? 1 : 0,
+                  transition: "opacity 180ms ease-out",
+                }}
+              >
+                <div className="logo-anim-float">
+                  <img
+                    src={fmtLogo}
+                    alt="FMT"
+                    className="logo-img object-contain drop-shadow-sm"
+                    draggable="false"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* LOGO STAGE (absolute over the whole hero so it can start centered on screen, then moves to right column) */}
-      <div
-        className={["logo-stage", isMove ? "logo-stage--move" : "logo-stage--hold"].join(" ")}
-        style={
-          isMove
-            ? {
-                left: targetPosition.left,
-                top: targetPosition.top,
-              }
-            : {}
-        }
-      >
-        {/* logo - moves from center to right column */}
-        <div
-          className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ${
-            isMove ? "logo-float" : "logo-hold"
-          }`}
-          style={{ zIndex: 1 }}
-        >
-          <img
-            src={fmtLogo}
-            alt="FMT"
-            className="logo-img object-contain drop-shadow-sm"
-            draggable="false"
-          />
+      {/* ✅ OVERLAY LOGO (only for the travel animation) */}
+      {showOverlay && (
+        <div className="overlay-stage">
+          <div
+            className={["overlay-mover", phase === "hold" ? "overlay--hold" : "overlay--move"].join(
+              " "
+            )}
+            style={
+              phase === "move"
+                ? {
+                    transform: `translate(-50%, -50%) translate(${delta.x}px, ${delta.y}px)`,
+                  }
+                : undefined
+            }
+          >
+            {/* IMPORTANT: animate child, not the mover (no transform conflicts) */}
+            <div className={phase === "hold" ? "logo-anim-hold" : "logo-anim-float"}>
+              <img
+                src={fmtLogo}
+                alt="FMT"
+                className="logo-img object-contain drop-shadow-sm"
+                draggable="false"
+              />
+            </div>
+          </div>
         </div>
-      </div>
+      )}
 
       <style>{`
-        /* Responsive stage size (used by both logo travel stage and diagram) */
         :root{
           --stage: clamp(260px, 70vw, 380px);
         }
 
-        /* The stage is always absolute so it can travel across the whole screen */
-        .logo-stage{
-          position: absolute;
-          width: var(--stage);
-          height: var(--stage);
-          transition: transform 900ms cubic-bezier(.22,.8,.2,1);
-          will-change: transform;
-        }
-
-        /* Diagram container uses same stage size */
+        /* Diagram container uses stage size */
         .diagram-stage{
           width: var(--stage);
           height: var(--stage);
         }
 
-        /* HOLD = perfectly centered on screen */
-        .logo-stage--hold{
-          left: 50%;
-          top: 50%;
-          translate: -50% -50%;
-          transform: scale(1);
-        }
-
-        /* MOVE = positioned in right column (calculated via JS) */
-        .logo-stage--move{
-          translate: -50% -50%;
-          transform: scale(1);
-        }
-
-        /* Make the fixed-distance (180px) ring fit on smaller screens by scaling
-           (logic untouched — we scale the whole diagram instead). */
         @media (max-width: 1023px){
           .diagram-stage{
             transform: scale(0.9);
@@ -218,22 +229,54 @@ export default function HeroSection() {
           }
         }
 
-        /* Responsive logo image size */
+        /* Responsive logo */
         .logo-img{
           width: clamp(140px, 40vw, 210px);
           height: clamp(140px, 40vw, 210px);
         }
 
-        /* Logo breathing while held */
-        .logo-hold { animation: holdBreath 2.2s ease-in-out infinite; }
-        @keyframes holdBreath {
+        /* Overlay layer covers the hero */
+        .overlay-stage{
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          z-index: 50;
+        }
+
+        /* This element starts centered in viewport and moves to target */
+        .overlay-mover{
+          position: fixed;
+          left: 50vw;
+          top: 50vh;
+          transform: translate(-50%, -50%);
+          transition: transform ${MOVE_MS}ms cubic-bezier(.22,.8,.2,1);
+          will-change: transform;
+        }
+
+        .overlay--hold{
+          transform: translate(-50%, -50%);
+        }
+        .overlay--move{
+          /* transform set inline */
+        }
+
+        /* Animations must not touch centering transforms */
+        .logo-anim-hold{
+          animation: holdBreath 2.2s ease-in-out infinite;
+          transform-origin: center;
+        }
+
+        @keyframes holdBreath{
           0%, 100% { transform: scale(1.02); }
           50%      { transform: scale(1.05); }
         }
 
-        /* Logo float after move */
-        .logo-float { animation: logoFloat 3.5s ease-in-out infinite; }
-        @keyframes logoFloat {
+        .logo-anim-float{
+          animation: logoFloat 3.5s ease-in-out infinite;
+          transform-origin: center;
+        }
+
+        @keyframes logoFloat{
           0%, 100% { transform: translateY(0); }
           50%      { transform: translateY(-5px); }
         }

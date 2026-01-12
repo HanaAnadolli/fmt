@@ -1,41 +1,49 @@
-import React, { useEffect } from "react";
-import Header from "../components/Header";
-import ContactSection from "../components/ContactSection";
-import Footer from "../components/Footer";
-import aboutVideo from "../assets/about/about-video.mp4";
-import ComingSoon from "../components/Home/ComingSoon";
+import React, { useEffect, useRef } from "react"
+import Header from "../components/Header"
+import ContactSection from "../components/ContactSection"
+import Footer from "../components/Footer"
+import aboutVideo from "../assets/about/about-video.mp4"
+import ComingSoon from "../components/Home/ComingSoon"
 
 const About = () => {
+  const videoRef = useRef(null)
+
   useEffect(() => {
-    // Optional: add a body class to make header transparent for this page
-    document.body.classList.add("header-transparent");
-    return () => document.body.classList.remove("header-transparent");
-  }, []);
+    // Transparent header for this page
+    document.body.classList.add("header-transparent")
+    return () => document.body.classList.remove("header-transparent")
+  }, [])
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    const handleLoaded = () => {
+      video.playbackRate = 0.18 // ⬅️ slower & smoother than 0.25
+      video.play().catch(() => {})
+    }
+
+    video.addEventListener("loadeddata", handleLoaded)
+    return () => video.removeEventListener("loadeddata", handleLoaded)
+  }, [])
 
   return (
     <div className="min-h-screen">
       {/* Transparent Header */}
       <Header transparent />
 
-      {/* Main Content Area with Video Background */}
+      {/* Hero with Video Background */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Video Background */}
         <div className="absolute inset-0 w-full h-full">
           <video
+            ref={videoRef}
             autoPlay
             muted
             loop
             playsInline
             preload="auto"
-            className="w-full h-full object-cover"
-            style={{
-              mixBlendMode: "screen", // makes black transparent
-              filter: "brightness(1.15) contrast(1.05) saturate(1.1)",
-            }}
-            onLoadedData={(e) => {
-              // Slow down video speed to 25%
-              e.target.playbackRate = 0.25;
-            }}
+            className="w-full h-full object-cover about-video"
           >
             <source src={aboutVideo} type="video/mp4" />
             Your browser does not support the video tag.
@@ -52,12 +60,25 @@ const About = () => {
             <span className="font-bold text-primary">KS-TF AG</span> (KSTF).
           </p>
         </div>
+
+        {/* Soft overlay for contrast */}
+        <div className="absolute inset-0 bg-white/10 pointer-events-none" />
       </section>
 
       <ComingSoon />
       <ContactSection />
-    </div>
-  );
-};
 
-export default About;
+      {/* Local styles */}
+      <style>{`
+        .about-video{
+          mix-blend-mode: screen; /* black becomes transparent */
+          filter: brightness(1.15) contrast(1.05) saturate(1.1);
+          will-change: transform;
+          transform: translateZ(0);
+        }
+      `}</style>
+    </div>
+  )
+}
+
+export default About

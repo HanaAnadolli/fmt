@@ -27,7 +27,7 @@ const BackToTop = () => {
         w-12 h-12 sm:w-14 sm:h-14
         bg-primary rounded-full
         flex items-center justify-center
-        shadow-lg hover:shadow-xl
+        hover:shadow-xl
         transition-all duration-300 ease-out
         z-50
         ${
