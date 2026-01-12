@@ -95,7 +95,7 @@ export default function Contact() {
       <div
         className="min-h-screen"
         style={{
-          background: "linear-gradient(180deg, #E3E7EB 0%, #E3E7EB 40%, #36A8DF 100%)",
+          background: "linear-gradient(180deg, #E4E4E4 0%, #E4E4E4 40%, #36A8DF 100%)",
         }}
       >
         <div className="container mx-auto px-6 py-12">

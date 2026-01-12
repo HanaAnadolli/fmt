@@ -1,26 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react"
 
 const BackToTop = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
     const toggleVisibility = () => {
-      setIsVisible(window.pageYOffset > 400);
-    };
+      setIsVisible(window.scrollY > 400)
+    }
 
-    window.addEventListener("scroll", toggleVisibility);
-    return () => window.removeEventListener("scroll", toggleVisibility);
-  }, []);
+    toggleVisibility()
+    window.addEventListener("scroll", toggleVisibility, { passive: true })
+    return () => window.removeEventListener("scroll", toggleVisibility)
+  }, [])
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }
 
   return (
     <button
       onClick={scrollToTop}
       aria-label="Back to top"
       className={`
+        group
         fixed bottom-8 left-4 sm:left-8
         w-12 h-12 sm:w-14 sm:h-14
         bg-primary rounded-full
@@ -49,7 +51,7 @@ const BackToTop = () => {
         />
       </svg>
     </button>
-  );
-};
+  )
+}
 
-export default BackToTop;
+export default BackToTop

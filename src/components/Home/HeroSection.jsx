@@ -186,7 +186,6 @@ export default function HeroSection() {
         <span className="text-sm font-semibold">Chat</span>
       </button>
 
-      {/* Component-scoped CSS for "center -> right" animation + RESPONSIVE fixes */}
       <style>{`
         /* Responsive stage size (used by both logo travel stage and diagram) */
         :root{
