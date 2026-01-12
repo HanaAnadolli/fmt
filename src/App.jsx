@@ -1,17 +1,18 @@
-import { Routes, Route } from "react-router-dom"
-import Home from "./pages/Home"
-import About from "./pages/About"
-import Contact from "./pages/Contact"
-import Blog from "./pages/Blog"
-import BlogDetail from "./pages/BlogDetail"
-import Footer from "./components/Footer"
-import BackToTop from "./components/BackToTop"
-import ScrollToTop from "./components/ScrollToTop"
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Blog from "./pages/Blog";
+import BlogDetail from "./pages/BlogDetail";
+import Footer from "./components/Footer";
+import BackToTop from "./components/BackToTop";
+import ScrollToTop from "./components/ScrollToTop";
+import ChatBox from "./components/ChatBox"; // ✅ add this
 
 export default function App() {
   return (
     <div style={{ backgroundColor: "#E4E4E4", minHeight: "100vh" }}>
-      {/* scroll to top on every route change */}
+      {/* Scroll to top on route change */}
       <ScrollToTop />
 
       <Routes>
@@ -24,8 +25,10 @@ export default function App() {
         <Route path="/news/:id" element={<BlogDetail />} />
       </Routes>
 
+      {/* Global UI */}
       <Footer />
       <BackToTop />
+      <ChatBox /> 
     </div>
-  )
+  );
 }
