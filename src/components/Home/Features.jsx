@@ -1,5 +1,19 @@
-import { useMemo, useState } from "react";
-import Vector from "../../assets/home/Vector.svg?react";
+import { useMemo, useState } from "react"
+import Vector from "../../assets/home/Vector.svg?react"
+
+// ✅ import images (Vite will bundle them correctly)
+import financialsSpreadingImg from "../../assets/home/financials-spreading.png"
+import portfolioManagementImg from "../../assets/home/portfolio-management.png"
+import financialAnalysisImg from "../../assets/home/financial-analysis.png"
+import peerGroupComparisonImg from "../../assets/home/peer-group-comparison.png"
+import documentRepositoryImg from "../../assets/home/document-repository.png"
+import customisableRatingMethodologiesImg from "../../assets/home/customisable-rating-methodologies.png"
+import liquidityAssessmentImg from "../../assets/home/liquidity-assessment.png"
+import creditLimitManagementImg from "../../assets/home/credit-limit-management.png"
+import reportingImg from "../../assets/home/reporting.png"
+import alertsNotificationsImg from "../../assets/home/alerts-notifications.png"
+import securityFrameworkImg from "../../assets/home/security-framework.png"
+import loremImg from "../../assets/home/lorem.png"
 
 const FEATURES = [
   {
@@ -8,7 +22,7 @@ const FEATURES = [
     title: "Financials Spreading",
     description:
       "FMT leverages AI to automate the transfer of data from financial statements into the analysis software. Analysts maintain full control—reviewing, editing, or manually entering data as needed. When both Income Statement and Balance Sheet are spread, FMT will generate the Cash Flow Statement and display details in consideration of different periods, such as quarters, half years and last twelve months.",
-    imageSrc: "/src/assets/home/financials-spreading.png",
+    imageSrc: financialsSpreadingImg,
   },
   {
     key: "portfolio-management",
@@ -16,7 +30,7 @@ const FEATURES = [
     title: "Portfolio Management",
     description:
       "Aggregate companies into portfolios and manage credit risk on a consolidated portfolio level. FMT calculates portfolio-level risk ratings, creates portfolio reports, stores supporting documentation, and provides a complete view for risk oversight.",
-    imageSrc: "/src/assets/home/portfolio-managementt.png",
+    imageSrc: portfolioManagementImg,
   },
   {
     key: "financial-analysis",
@@ -24,7 +38,7 @@ const FEATURES = [
     title: "Financial Analysis",
     description:
       "With over 60 financial ratios across categories such as performance, profitability, liquidity, leverage, coverage, and valuation, FMT offers a comprehensive perspective on financial health. The environment updates indicators to reflect evolving market needs.",
-    imageSrc: "/src/assets/home/financial-analysiss.png",
+    imageSrc: financialAnalysisImg,
   },
   {
     key: "peer-group-comparison",
@@ -32,7 +46,7 @@ const FEATURES = [
     title: "Peer Group Comparison",
     description:
       "Benchmark companies against peers across different portfolios, industries and geographies to evaluate financial viability and credit strength.",
-    imageSrc: "/src/assets/home/peer-group-comparison.png",
+    imageSrc: peerGroupComparisonImg,
   },
   {
     key: "document-repository",
@@ -40,7 +54,7 @@ const FEATURES = [
     title: "Document Repository",
     description:
       "A centralised repository allows users to navigate company data across time, reporting periods, and financial statement sections. Analysts can track key documents—such as financial statements, business plans, and meeting minutes—using structured metadata.",
-    imageSrc: "/src/assets/home/document-repository.png",
+    imageSrc: documentRepositoryImg,
   },
   {
     key: "customisable-rating-methodologies",
@@ -48,7 +62,7 @@ const FEATURES = [
     title: "Customisable Credit Rating Methodologies",
     description:
       "FMT enables clients to design their own credit rating frameworks by selecting ratios, assigning weights, setting rating ceilings, and incorporating qualitative factors. Manual adjustment logic ensures full flexibility.",
-    imageSrc: "/src/assets/home/customisable-rating-methodologies.png",
+    imageSrc: customisableRatingMethodologiesImg,
   },
   {
     key: "liquidity-assessment",
@@ -56,7 +70,7 @@ const FEATURES = [
     title: "Liquidity Assessment & Financial Modelling",
     description:
       "Generate short- and long-term projections based on tailored assumptions. FMT automatically creates forecasts and produces cash flow-based liquidity models to strengthen credit decisioning.",
-    imageSrc: "/src/assets/home/liquidity-assessment.png",
+    imageSrc: liquidityAssessmentImg,
   },
   {
     key: "credit-limit-management",
@@ -64,7 +78,7 @@ const FEATURES = [
     title: "Credit Limit Management",
     description:
       "Define, monitor, and control credit limits at company or portfolio level. API integration with ERP systems supports real-time data flow, ensuring transparency and proactive risk management.",
-    imageSrc: "/src/assets/home/credit-limit-management.png",
+    imageSrc: creditLimitManagementImg,
   },
   {
     key: "reporting",
@@ -72,7 +86,7 @@ const FEATURES = [
     title: "Reporting",
     description:
       "Access a library of standardised reports or create custom ones tailored to your needs. Reports can be branded, adapted in structure, and enhanced with AI to maximise analytical depth.",
-    imageSrc: "/src/assets/home/reportingg.png",
+    imageSrc: reportingImg,
   },
   {
     key: "alerts-notifications",
@@ -80,7 +94,7 @@ const FEATURES = [
     title: "Alerts & Notifications",
     description:
       "Stay informed with fully configurable alerts. Trigger notifications based on events, user preferences, or calculation-based rules, such as ratio thresholds or rating changes.",
-    imageSrc: "/src/assets/home/alerts-notifications.png",
+    imageSrc: alertsNotificationsImg,
   },
   {
     key: "security-framework",
@@ -88,7 +102,7 @@ const FEATURES = [
     title: "Robust Security Framework",
     description:
       "Protect sensitive data with differentiated views for internal and external users, dual approval workflows to minimise manual errors, and built-in task management to reduce operational risk.",
-    imageSrc: "/src/assets/home/security-framework.png",
+    imageSrc: securityFrameworkImg,
   },
   {
     key: "lorem",
@@ -96,9 +110,9 @@ const FEATURES = [
     title: "Lorem Ipsum",
     description:
       "Protect sensitive data with differentiated views for internal and external users, dual approval workflows to minimise manual errors, and built-in task management to reduce operational risk.",
-    imageSrc: "/src/assets/home/lorem.png",
+    imageSrc: loremImg,
   },
-];
+]
 
 function FeaturePill({ label, onClick }) {
   return (
@@ -130,7 +144,7 @@ function FeaturePill({ label, onClick }) {
         ))}
       </div>
     </button>
-  );
+  )
 }
 
 function Modal({ open, onClose, title, description, imageSrc }) {
@@ -150,12 +164,14 @@ function Modal({ open, onClose, title, description, imageSrc }) {
       <div
         className={[
           "relative w-full",
-          // ✅ slightly bigger modal
           "max-w-6xl",
           "rounded-[26px] bg-white shadow-2xl",
           "p-6 sm:p-10 lg:p-12",
           "max-h-[92vh] overflow-y-auto",
         ].join(" ")}
+        role="dialog"
+        aria-modal="true"
+        aria-label={title}
       >
         {/* Close */}
         <button
@@ -170,9 +186,7 @@ function Modal({ open, onClose, title, description, imageSrc }) {
         <div className="grid items-center gap-8 lg:gap-14 lg:grid-cols-2">
           {/* Text */}
           <div>
-            <h3 className="text-3xl font-extrabold text-primary">
-              {title}
-            </h3>
+            <h3 className="text-3xl font-extrabold text-primary">{title}</h3>
             <p className="mt-5 text-base leading-7 text-slate-700">
               {description}
             </p>
@@ -185,18 +199,21 @@ function Modal({ open, onClose, title, description, imageSrc }) {
                 "w-full max-w-[520px]",
                 "rounded-3xl bg-slate-100",
                 "grid place-items-center",
-                // ✅ bigger container
                 "h-[220px] sm:h-[300px] lg:h-[360px]",
-                // padding so image never touches edges
                 "p-6 sm:p-8",
               ].join(" ")}
             >
               {imageSrc ? (
                 <img
                   src={imageSrc}
-                  alt=""
+                  alt={title}
                   className="h-full w-full object-contain scale-[0.88]"
                   draggable={false}
+                  onError={() => {
+                    // helpful debug if anything is still wrong
+                    // eslint-disable-next-line no-console
+                    console.log("Image failed to load:", imageSrc)
+                  }}
                 />
               ) : (
                 <div className="text-sm font-semibold text-slate-400">
@@ -211,12 +228,11 @@ function Modal({ open, onClose, title, description, imageSrc }) {
   )
 }
 
-
 export default function Features() {
-  const data = useMemo(() => FEATURES, []);
-  const [openKey, setOpenKey] = useState(null);
+  const data = useMemo(() => FEATURES, [])
+  const [openKey, setOpenKey] = useState(null)
 
-  const active = data.find((x) => x.key === openKey) || null;
+  const active = data.find((x) => x.key === openKey) || null
 
   return (
     <section className="relative w-full pt-20 sm:pt-24 lg:pt-28 pb-16 sm:pb-20">
@@ -226,10 +242,10 @@ export default function Features() {
         </h2>
 
         <p className="mt-3 max-w-5xl text-[13px] leading-5 text-slate-700 sm:text-[14px]">
-          FMT delivers a powerful suite of features designed to enhance
-          accuracy, efficiency, and flexibility in financial and credit risk
-          analysis. Every functionality is built to support customisation for
-          each client while streamlining critical workflows.
+          FMT delivers a powerful suite of features designed to enhance accuracy,
+          efficiency, and flexibility in financial and credit risk analysis.
+          Every functionality is built to support customisation for each client
+          while streamlining critical workflows.
         </p>
 
         <div className="mt-10 sm:mt-14 lg:mt-16 grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
@@ -251,5 +267,5 @@ export default function Features() {
         imageSrc={active?.imageSrc ?? ""}
       />
     </section>
-  );
+  )
 }
