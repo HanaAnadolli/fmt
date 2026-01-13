@@ -34,38 +34,37 @@ const ITEMS = [
     icon: icon5,
   },
   { id: 6, title: "Producing projections short and long term.", icon: icon6 },
-  { id: 7, title: "Liquidity assessment impacting the company rating.", icon: icon7 },
+  {
+    id: 7,
+    title: "Liquidity assessment impacting the company rating.",
+    icon: icon7,
+  },
   {
     id: 8,
-    title: "Automated notifications to users when reaching established thresholds.",
+    title:
+      "Automated notifications to users when reaching established thresholds.",
     icon: icon8,
   },
   {
     id: 9,
-    title: "Maintaining all analytical documentation in a centralized repository.",
+    title:
+      "Maintaining all analytical documentation in a centralized repository.",
     icon: icon9,
   },
 ]
 
-function clamp2Style() {
-  return {
-    display: "-webkit-box",
-    WebkitLineClamp: 2,
-    WebkitBoxOrient: "vertical",
-  }
-}
-
-// simple responsive hook (no libs)
+// responsive hook (no libs)
 function useIsMdUp() {
   const [isMdUp, setIsMdUp] = useState(() =>
-    typeof window === "undefined" ? true : window.matchMedia("(min-width: 768px)").matches
+    typeof window === "undefined"
+      ? true
+      : window.matchMedia("(min-width: 768px)").matches
   )
 
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 768px)")
     const onChange = () => setIsMdUp(mq.matches)
 
-    // Safari support
     if (mq.addEventListener) mq.addEventListener("change", onChange)
     else mq.addListener(onChange)
 
@@ -91,7 +90,7 @@ export default function Technology() {
     [pageSize]
   )
 
-  // keep page valid when pageSize changes (mobile <-> desktop)
+  // keep page valid on resize
   useEffect(() => {
     setPage((p) => Math.min(p, totalPages - 1))
   }, [totalPages])
@@ -103,46 +102,43 @@ export default function Technology() {
   const canNext = page < totalPages - 1
 
   return (
-    <section className="w-full py-14 sm:py-20" style={{ backgroundColor: "#E4E4E4" }}>
+    <section className="w-full py-14 sm:py-20 bg-[#E4E4E4]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
-        {/* Header row */}
+        {/* Header */}
         <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between md:gap-10">
           <div className="max-w-3xl">
             <h2 className="text-3xl font-extrabold tracking-tight text-primary sm:text-4xl lg:text-5xl">
               Technology
             </h2>
-            <p className="mt-4 max-w-3xl text-[15px] leading-7 text-slate-800/90 sm:text-[18px]">
-              A financial analysis tool powered by artificial intelligence, designed to streamline,
-              automate, and elevate the entire financial analysis process.
+            <p className="mt-4 text-[15px] leading-7 text-slate-800/90 sm:text-[18px]">
+              A financial analysis tool powered by artificial intelligence,
+              designed to streamline, automate, and elevate the entire financial
+              analysis process.
             </p>
           </div>
 
-          {/* Arrows (fixed) */}
-          <div className="flex items-center gap-3 md:mt-2 md:self-start">
+          {/* Arrows */}
+          <div className="flex items-center gap-3 md:mt-2">
             <button
-              type="button"
               onClick={() => setPage((p) => Math.max(0, p - 1))}
               disabled={!canPrev}
-              className={[
-                "grid h-11 w-11 place-items-center rounded-lg bg-primary text-white shadow-sm",
-                "transition-opacity active:scale-[0.98]",
-                !canPrev ? "opacity-40 cursor-not-allowed" : "hover:opacity-90",
-              ].join(" ")}
-              aria-label="Previous"
+              className={`grid h-11 w-11 place-items-center rounded-lg bg-primary text-white shadow-sm transition ${
+                canPrev
+                  ? "hover:opacity-90"
+                  : "opacity-40 cursor-not-allowed"
+              }`}
             >
               ←
             </button>
 
             <button
-              type="button"
               onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
               disabled={!canNext}
-              className={[
-                "grid h-11 w-11 place-items-center rounded-lg bg-primary text-white shadow-sm",
-                "transition-opacity active:scale-[0.98]",
-                !canNext ? "opacity-40 cursor-not-allowed" : "hover:opacity-90",
-              ].join(" ")}
-              aria-label="Next"
+              className={`grid h-11 w-11 place-items-center rounded-lg bg-primary text-white shadow-sm transition ${
+                canNext
+                  ? "hover:opacity-90"
+                  : "opacity-40 cursor-not-allowed"
+              }`}
             >
               →
             </button>
@@ -150,34 +146,35 @@ export default function Technology() {
         </div>
 
         {/* Cards */}
-        <div className={`mt-10 sm:mt-14 grid gap-6 ${isMdUp ? "md:grid-cols-3" : "grid-cols-1"}`}>
+        <div
+          className={`mt-10 sm:mt-14 grid gap-6 ${
+            isMdUp ? "md:grid-cols-3" : "grid-cols-1"
+          }`}
+        >
           {visibleItems.map((item) => (
             <div
               key={item.id}
               className={[
-                "flex items-center gap-5 sm:gap-7",
+                "flex items-start gap-6",
                 "rounded-[26px] bg-white",
                 "px-6 sm:px-10 py-7 sm:py-8",
                 "shadow-[0_10px_30px_rgba(0,0,0,0.06)]",
                 "transition-colors duration-200 hover:bg-[#36A8DF33]",
-                // ✅ on mobile let height be natural; on md+ keep your fixed height
-                isMdUp ? "h-[150px]" : "min-h-[130px]",
+                isMdUp ? "min-h-[150px]" : "min-h-[130px]",
               ].join(" ")}
             >
-              <div className="flex h-14 w-14 sm:h-16 sm:w-16 shrink-0 items-center justify-center rounded-2xl bg-[#9fd2ef]">
+              {/* Icon */}
+              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-[#9fd2ef]">
                 <img
                   src={item.icon}
                   alt=""
-                  className="h-[40px] w-[40px] max-h-[40px] max-w-[40px] flex-shrink-0 object-contain"
-                  style={{ minHeight: "40px", minWidth: "40px" }}
+                  className="h-[40px] w-[40px] object-contain"
                   draggable={false}
                 />
               </div>
 
-              <p
-                className="overflow-hidden text-[16px] font-semibold leading-7 text-slate-900 sm:text-[18px]"
-                style={clamp2Style()}
-              >
+              {/* Text */}
+              <p className="text-[16px] font-semibold leading-7 text-slate-900 sm:text-[18px]">
                 {item.title}
               </p>
             </div>
@@ -185,17 +182,16 @@ export default function Technology() {
         </div>
 
         {/* Dots */}
-        <div className="mt-10 sm:mt-12 flex justify-center gap-3 sm:gap-4">
+        <div className="mt-10 sm:mt-12 flex justify-center gap-3">
           {Array.from({ length: totalPages }).map((_, i) => (
             <button
               key={i}
-              type="button"
               onClick={() => setPage(i)}
-              className={[
-                "h-[7px] rounded-full transition-all",
-                i === page ? "w-10 sm:w-12 bg-primary" : "w-8 sm:w-10 bg-slate-300/80",
-              ].join(" ")}
-              aria-label={`Go to page ${i + 1}`}
+              className={`h-[7px] rounded-full transition-all ${
+                i === page
+                  ? "w-10 sm:w-12 bg-primary"
+                  : "w-8 sm:w-10 bg-slate-300/80"
+              }`}
             />
           ))}
         </div>
