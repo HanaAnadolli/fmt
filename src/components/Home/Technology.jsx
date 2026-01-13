@@ -11,7 +11,7 @@ import icon8 from "../../assets/home/icon8.svg"
 import icon9 from "../../assets/home/icon9.svg"
 
 const ITEMS = [
-  { id: 1, title: "Automatic spreading of financial statements", icon: icon1 },
+  { id: 1, title: "Automatic spreading of financial statements.", icon: icon1 },
   {
     id: 2,
     title:

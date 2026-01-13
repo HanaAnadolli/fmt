@@ -1,31 +1,32 @@
-import React, { useEffect, useRef } from "react"
-import Header from "../components/Header"
-import ContactSection from "../components/ContactSection"
-import Footer from "../components/Footer"
-import aboutVideo from "../assets/about/about-video.mp4"
-import ComingSoon from "../components/Home/ComingSoon"
+import React, { useEffect, useRef } from "react";
+import Header from "../components/Header";
+import ContactSection from "../components/ContactSection";
+import Footer from "../components/Footer";
+import aboutVideo from "../assets/about/about-video.mp4";
+import ComingSoon from "../components/Home/ComingSoon";
+import { Link } from "react-router-dom";
 
 const About = () => {
-  const videoRef = useRef(null)
+  const videoRef = useRef(null);
 
   useEffect(() => {
     // Transparent header for this page
-    document.body.classList.add("header-transparent")
-    return () => document.body.classList.remove("header-transparent")
-  }, [])
+    document.body.classList.add("header-transparent");
+    return () => document.body.classList.remove("header-transparent");
+  }, []);
 
   useEffect(() => {
-    const video = videoRef.current
-    if (!video) return
+    const video = videoRef.current;
+    if (!video) return;
 
     const handleLoaded = () => {
-      video.playbackRate = 0.18 // ⬅️ slower & smoother than 0.25
-      video.play().catch(() => {})
-    }
+      video.playbackRate = 0.18; // ⬅️ slower & smoother than 0.25
+      video.play().catch(() => {});
+    };
 
-    video.addEventListener("loadeddata", handleLoaded)
-    return () => video.removeEventListener("loadeddata", handleLoaded)
-  }, [])
+    video.addEventListener("loadeddata", handleLoaded);
+    return () => video.removeEventListener("loadeddata", handleLoaded);
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -57,7 +58,15 @@ const About = () => {
           </h1>
           <p className="text-lg md:text-xl text-gray-800 leading-relaxed">
             The Financial Management Tool (FMT) is developed by{" "}
-            <span className="font-bold text-primary">KS-TF AG</span> (KSTF).
+            <a
+              href="https://kstf.ch/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-primary underline underline-offset-4 hover:opacity-80"
+            >
+              KS-TF AG (KSTF)
+            </a>
+            .
           </p>
         </div>
 
@@ -78,7 +87,7 @@ const About = () => {
         }
       `}</style>
     </div>
-  )
-}
+  );
+};
 
-export default About
+export default About;
