@@ -1,4 +1,5 @@
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, useLocation } from "react-router-dom"
+import { useEffect } from "react"
 import Home from "./pages/Home"
 import About from "./pages/About"
 import Contact from "./pages/Contact"
@@ -13,9 +14,21 @@ import ChatBox from "./components/ChatBox"
 import LegalCookies from "./pages/LegalCookies"
 import LegalPrivacy from "./pages/LegalPrivacy"
 
+const BODY_CLASS_NOT_HOME = "page-not-home"
+
 export default function App() {
+  const location = useLocation()
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      document.body.classList.remove(BODY_CLASS_NOT_HOME)
+    } else {
+      document.body.classList.add(BODY_CLASS_NOT_HOME)
+    }
+  }, [location.pathname])
+
   return (
-    <div style={{ backgroundColor: "#E4E4E4", minHeight: "100vh" }}>
+    <div className="min-h-screen">
       <ScrollToTop />
 
       <Routes>

@@ -26,6 +26,9 @@ export default function Header() {
     return () => window.removeEventListener("keydown", onKey)
   }, [])
 
+  const isHome = location.pathname === "/"
+  const headerBg = isHome ? "bg-transparent" : "bg-white"
+
   const base = "px-3 py-2 text-[19px] font-semibold relative group"
   const active = "text-primary"
   const inactive = "text-slate-700 hover:text-primary"
@@ -51,7 +54,7 @@ export default function Header() {
   )
 
   return (
-    <header className="relative w-full">
+    <header className={`relative w-full ${headerBg}`}>
       <div className="mx-auto flex h-[110px] max-w-7xl items-center px-6 sm:px-8 lg:px-10">
         {/* Logo */}
         <NavLink to="/" className="flex items-center">

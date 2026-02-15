@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import logoWhite from "../assets/logo-white.png";
+import logo from "../assets/fmt.png";
 import footerPeople from "../assets/footer-image.png";
 
 const Footer = () => {
@@ -11,13 +11,13 @@ const Footer = () => {
         <div className="flex flex-col gap-12 py-14 md:flex-row md:justify-between md:gap-10">
           
           {/* LEFT SIDE */}
-          <div className="flex flex-col gap-10 md:flex-row md:gap-20">
+          <div className="flex flex-col gap-10 md:flex-row md:gap-10">
             {/* Logo */}
             <div className="min-w-[180px]">
               <img
-                src={logoWhite}
+                src={logo}
                 alt="FMT"
-                className="h-10 w-auto object-contain"
+                className="h-20 w-auto object-contain"
                 draggable="false"
               />
             </div>
