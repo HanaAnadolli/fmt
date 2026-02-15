@@ -1,13 +1,10 @@
-import ContactSection from "../components/ContactSection";
 import Header from "../components/Header";
-import ComingSoon from "../components/Home/ComingSoon";
-import Features from "../components/Home/Features";
-import FMTEcosystem from "../components/Home/FMTEcosystem";
+import Automations from "../components/Home/Automations";
+import FeaturesCapabilities from "../components/Home/FeaturesCapabilities";
+import Flexibility from "../components/Home/Flexibility";
 import HeroSection from "../components/Home/HeroSection";
 import IntegrationCapabilities from "../components/Home/IntegrationCapabilities";
 import OurSolution from "../components/Home/OurSolution";
-import Technology from "../components/Home/Technology";
-
 export default function Home() {
   return (
     <>
@@ -15,12 +12,10 @@ export default function Home() {
       <main className="min-h-screen">
         <HeroSection />
         <OurSolution />
-        <Features />
-        <Technology />
+        <FeaturesCapabilities />
+        <Automations />
+        <Flexibility />
         <IntegrationCapabilities />
-        <FMTEcosystem />
-        <ComingSoon />
-        <ContactSection />
       </main>
     </>
   );

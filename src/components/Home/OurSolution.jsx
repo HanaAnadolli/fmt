@@ -1,34 +1,40 @@
 import React from "react";
+import graphic from "../../assets/home/graphic.png";
 
-function OurSolution() {
+export default function OurSolution() {
   return (
-    <section className="relative w-full">
+    <section className="bg-[#F6FBFF] py-24">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12">
-          {/* Left side - Heading */}
-          <div className="lg:col-span-3">
-            <h2 className="text-4xl font-bold text-primary lg:text-5xl">
+        <div className="grid items-center gap-16 md:grid-cols-2 md:gap-24">
+          
+          {/* LEFT: Image */}
+          <div className="flex justify-center md:justify-end">
+            <img
+              src={graphic}
+              alt="FMT solution graphic"
+              className="w-full max-w-lg object-contain"
+              draggable="false"
+            />
+          </div>
+
+          {/* RIGHT: Text */}
+          <div>
+            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-slate-900">
               Our Solution
             </h2>
-          </div>
 
-          {/* Vertical separator */}
-          <div className="hidden lg:block lg:col-span-1">
-            <div className="h-[130px] w-[5px] bg-primary/30 mx-auto"></div>
-          </div>
-
-          {/* Right side - Description */}
-          <div className="lg:col-span-8">
-            <p className="text-lg text-gray-700 leading-relaxed">
-              FMT (Financial Management Tool) is a financial analysis tool with artificial intelligence integration designed to streamline and improve
-              the financial analysis process. It supports a wide range of tasks, including financial spreading, credit rating calculations, and the generation 
-              of detailed reports at both the single name and portfolio level.
+            <p className="mt-6 max-w-xl text-lg leading-8 text-slate-600">
+              FMT (Financial Management Tool) is a semi or fully automated
+              financial analysis tool designed to streamline and improve the
+              financial analysis process. It supports a wide range of tasks,
+              including financial spreading, industry specific credit rating
+              calculations, and the generation of detailed reports at both the
+              single name and portfolio level.
             </p>
           </div>
+
         </div>
       </div>
     </section>
   );
 }
-
-export default OurSolution;

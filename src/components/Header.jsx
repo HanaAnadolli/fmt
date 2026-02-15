@@ -3,15 +3,8 @@ import { useEffect, useState } from "react"
 import fmtLogo from "../assets/fmt.png"
 
 export default function Header() {
-  const [isVisible, setIsVisible] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const HOLD_MS = 500
   const location = useLocation()
-
-  useEffect(() => {
-    const t = setTimeout(() => setIsVisible(true), HOLD_MS)
-    return () => clearTimeout(t)
-  }, [])
 
   // close menu on route change
   useEffect(() => {
@@ -58,12 +51,7 @@ export default function Header() {
   )
 
   return (
-    <header
-      className={`relative w-full transition-opacity duration-700 ${
-        isVisible ? "opacity-100" : "opacity-0"
-      }`}
-      style={{ backgroundColor: "#E4E4E4" }}
-    >
+    <header className="relative w-full">
       <div className="mx-auto flex h-[110px] max-w-7xl items-center px-6 sm:px-8 lg:px-10">
         {/* Logo */}
         <NavLink to="/" className="flex items-center">
@@ -103,22 +91,19 @@ export default function Header() {
           menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
-        {/* Background */}
         <div
           className="absolute inset-0 bg-black/40"
           onClick={() => setMenuOpen(false)}
         />
 
-        {/* Drawer */}
         <aside
-          className={`absolute right-0 top-0 h-full w-[85%] max-w-sm bg-[#E4E4E4] shadow-xl transition-transform duration-300 ${
+          className={`absolute right-0 top-0 h-full w-[85%] max-w-sm bg-white shadow-xl transition-transform duration-300 ${
             menuOpen ? "translate-x-0" : "translate-x-full"
           }`}
           role="dialog"
           aria-modal="true"
         >
           <div className="flex h-full flex-col">
-            {/* Top bar */}
             <div className="flex justify-end px-6 py-5">
               <button
                 aria-label="Close menu"
@@ -136,7 +121,6 @@ export default function Header() {
               </button>
             </div>
 
-            {/* Links */}
             <nav className="flex flex-col gap-6 px-8 pt-6">
               <Item to="/" label="Home" end onClick={() => setMenuOpen(false)} />
               <Item to="/about" label="About Us" onClick={() => setMenuOpen(false)} />
