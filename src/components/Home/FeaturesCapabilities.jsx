@@ -17,27 +17,27 @@ import icon10 from "../../assets/home/icon10.png";
 const LEFT = [
   {
     title: "Financials Spreading",
-    body: "FMT automate the transfer of data from financial statements into the analysis software. Analysts maintain full control—reviewing, editing, or manually entering data as needed. When both Income Statement and Balance Sheet are spread, FMT will generate the Cash Flow Statement and display details in consideration of different periods, such as quarters, half years and last twelve months.",
+    body: "Transfer companies’ financials directly into the FMT spreading module. Once both the Income Statement and Balance Sheet are entered, FMT generates the Cash Flow Statement. The Cash Flow Statement can also be manually added. Companies’ financials can be viewed in various formats, including Last-Twelve-Months (LTM), Year-To-Date (YTD), quarterly, and semiannual.",
     icon: icon1,
   },
   {
     title: "Portfolio Management",
-    body: "Organize names, sectors, and portfolios with fast search and tagging.",
+    body: "Aggregate companies into portfolios and manage credit risk at the portfolio level. FMT calculates portfolio-level risk ratings, creates reports, stores supporting documentation, and provides a complete view for adequate credit risk oversight.",
     icon: icon2,
   },
   {
     title: "Financial Analysis",
-    body: "Analyze performance, trends, and key ratios with structured outputs.",
+    body: "With over 60 financial ratios across categories such as performance, profitability, liquidity, leverage, coverage, and valuation, FMT offers a comprehensive perspective on financial health. Indicators are constantly updated to reflect evolving market needs.",
     icon: icon3,
   },
   {
     title: "Peer Group Comparison",
-    body: "Benchmark issuers against peers using configurable peer sets.",
+    body: "Benchmark companies against peers across different portfolios, industries and geographies to evaluate and compare which companies are riskier based on the chosen comparison parameters.",
     icon: icon4,
   },
   {
     title: "Document Repository",
-    body: "Centralize documents with versioning, metadata, and permissions.",
+    body: "A centralised repository allows users to navigate company data across time periods, reporting periods, and financial statement sections. Analysts can track key documents such as financial statements, business plans, and meeting minutes.",
     icon: icon5,
   },
 ];
@@ -45,27 +45,27 @@ const LEFT = [
 const RIGHT = [
   {
     title: "Customisable Credit Rating Methodologies",
-    body: "Industry-specific rating logic with transparent scoring and overrides.",
+    body: "FMT enables clients to design their own credit rating frameworks by selecting ratios, assigning weights, setting rating ceilings, and incorporating qualitative factors. Manual adjustment logic ensures full flexibility.",
     icon: icon6,
   },
   {
     title: "Liquidity Assessment & Financial Modelling",
-    body: "Scenario-based liquidity views and modelling support.",
+    body: "Generate short- and long-term projections based on analyst assumptions. FMT automatically creates forecasts and produces cash flow-based liquidity models to support a full credit assessment. The analyst has full flexibility in setting the assumptions and time horizon for the projections.",
     icon: icon7,
   },
   {
     title: "Alerts & Notifications",
-    body: "Stay updated with configurable alerts and workflow reminders.",
+    body: "Stay informed with fully configurable alerts. Trigger notifications based on events, user preferences, or (in future versions) calculation-based rules, such as ratio thresholds or rating changes.",
     icon: icon8,
   },
   {
     title: "Reporting",
-    body: "Generate consistent reports at single-name and portfolio levels.",
+    body: "Access a library of standardised reports or create custom ones tailored to your needs. Reports can be branded, adapted in structure, and enhanced with full automation to maximise analytical depth.",
     icon: icon9,
   },
   {
     title: "Robust Security Framework",
-    body: "Role-based access, audit trails, and secure data handling.",
+    body: "Protect sensitive data with differentiated views for internal and external users, dual approval workflows to minimise manual errors, and built-in task management to reduce operational risk.",
     icon: icon10,
   },
 ];
@@ -119,7 +119,9 @@ export default function FeaturesCapabilities() {
                 <p className="mt-6 max-w-[620px] text-[16px] leading-7 text-[#4B5B73]">
                   FMT delivers a powerful suite of features designed to enhance
                   accuracy, efficiency, and flexibility in financial and credit
-                  risk analysis.
+                  risk analysis. Every functionality is built to support
+                  customisation for each client while streamlining critical
+                  workflows.
                 </p>
               </div>
 

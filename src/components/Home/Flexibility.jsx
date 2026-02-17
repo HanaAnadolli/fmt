@@ -1,6 +1,4 @@
 import React from "react";
-
-// ✅ Update these paths to match your saved icons
 import versatilityIcon from "../../assets/home/versatility.png";
 import modularityIcon from "../../assets/home/modularity.png";
 import controlIcon from "../../assets/home/control.png";
