@@ -17,7 +17,7 @@ export default function IntegrationCapabilities() {
 
   return (
     <>
-      <section className="py-24 bg-gradient-to-b from-[#001B29] to-[#00344F]">
+      <section className="py-12 bg-gradient-to-b from-[#001B29] to-[#00344F]">
         <div className="mx-auto max-w-[1200px] px-6">
           <div className="grid items-center gap-16 md:grid-cols-2">
             {/* LEFT CONTENT */}

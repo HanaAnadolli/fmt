@@ -2,7 +2,7 @@ import heroImage from "../../assets/home/hero-image.png";
 
 export default function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-[#EAF6FF]">
+    <section className="relative overflow-hidden">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid min-h-[calc(100vh-86px)] items-center gap-10 py-12 lg:grid-cols-2 lg:py-16">
           <div className="max-w-xl">

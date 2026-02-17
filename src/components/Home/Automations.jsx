@@ -51,7 +51,7 @@ export default function Automations() {
   const graphics = [graphic1, graphic2, graphic3, graphic4];
 
   return (
-    <section className="bg-[#F6FBFF] py-20">
+    <section className="py-20">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid items-center gap-16 md:grid-cols-2">
           <div className="max-w-3xl">

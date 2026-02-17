@@ -33,7 +33,7 @@ export default function Flexibility() {
   ];
 
   return (
-    <section className="bg-[#F6FBFF] py-20">
+    <section className="py-20">
       <div className="mx-auto max-w-[1200px] px-6">
         {/* Header */}
         <div className="text-center">

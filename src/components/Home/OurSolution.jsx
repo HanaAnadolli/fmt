@@ -3,7 +3,7 @@ import graphic from "../../assets/home/graphic.png";
 
 export default function OurSolution() {
   return (
-    <section className="bg-[#F6FBFF] py-24">
+    <section className="py-12">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid items-center gap-16 md:grid-cols-2 md:gap-24">
           

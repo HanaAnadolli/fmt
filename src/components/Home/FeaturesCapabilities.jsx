@@ -103,7 +103,7 @@ export default function FeaturesCapabilities() {
   const [openKey, setOpenKey] = useState(null);
 
   return (
-    <section className="bg-[#F6FBFF] py-14 md:py-16">
+    <section className="py-14 md:py-16">
       <div className="mx-auto max-w-[1200px] px-5 md:px-6">
         <div className="rounded-[22px] border border-[#E6EEF7] bg-white shadow-[0_6px_24px_rgba(15,23,42,0.06)]">
           {/* Header Section */}
