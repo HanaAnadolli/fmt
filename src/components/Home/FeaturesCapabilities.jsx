@@ -72,7 +72,7 @@ const RIGHT = [
 
 function Row({ title, body, icon, open, onToggle }) {
   return (
-    <div className="rounded-xl border border-[#CFEAFF] bg-white">
+    <div className="rounded-[2px] border border-[#CFEAFF] bg-white">
       <button
         type="button"
         onClick={onToggle}
@@ -80,12 +80,12 @@ function Row({ title, body, icon, open, onToggle }) {
       >
         <div className="flex items-center gap-4">
           <img src={icon} alt="" className="h-5 w-5 object-contain" />
-          <span className="text-[15px] font-semibold text-[#0B1B33]">
+          <span className="text-[15px] font-semibold text-[#011A27]">
             {title}
           </span>
         </div>
 
-        <span className="text-[#1DA1F2] text-xl leading-none font-medium">
+        <span className="text-[#2FA3E0] text-xl leading-none font-medium">
           {open ? "−" : "+"}
         </span>
       </button>
@@ -175,8 +175,8 @@ export default function FeaturesCapabilities() {
 
           {/* Features */}
           <div className="px-8 pb-12 pt-10 md:px-12">
-            <div className="relative grid gap-10 md:grid-cols-2">
-              <div className="space-y-5 md:pr-6">
+            <div className="relative grid md:grid-cols-2">
+              <div className="space-y-5">
                 {LEFT.map((item, i) => {
                   const key = `L${i}`;
                   return (

@@ -96,12 +96,6 @@ export default function Automations() {
                           <h4 className="text-[16px] font-semibold text-[#0B1B33]">
                             {item.title}
                           </h4>
-
-                          {item.comingSoon && (
-                            <span className="rounded-full bg-orange-100 px-3 py-1 text-xs font-medium text-orange-600">
-                              Coming Soon
-                            </span>
-                          )}
                         </div>
                       </div>
 

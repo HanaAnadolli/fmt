@@ -7,9 +7,8 @@ import omt from "../../assets/home/omt.png";
 import apiIcon from "../../assets/home/api-icon.png";
 import arrow from "../../assets/home/arrow.png";
 
-// ✅ modals you already have
-import OMTPopup from "./OMTPopup"; // <-- adjust path to your project
-import ServicesPopup from "./ServicesPopup"; // <-- adjust path to your project
+import OMTPopup from "./OMTPopup";
+import ServicesPopup from "./ServicesPopup";
 
 export default function IntegrationCapabilities() {
   const [openOMT, setOpenOMT] = useState(false);
@@ -20,7 +19,6 @@ export default function IntegrationCapabilities() {
       <section className="py-12 bg-gradient-to-b from-[#001B29] to-[#00344F]">
         <div className="mx-auto max-w-[1200px] px-6">
           <div className="grid items-center gap-16 md:grid-cols-2">
-            {/* LEFT CONTENT */}
             <div className="max-w-[600px] text-white">
               <h2 className="text-[40px] md:text-[46px] font-extrabold tracking-tight">
                 Integration Capabilities
@@ -46,11 +44,8 @@ export default function IntegrationCapabilities() {
               </p>
             </div>
 
-            {/* RIGHT DIAGRAM */}
             <div className="flex justify-center md:justify-end">
-              {/* responsive sizing wrapper */}
-              <div className="relative w-full max-w-[560px] md:max-w-[560px] max-md:max-w-[520px] aspect-[16/9]">
-                {/* Background rings */}
+              <div className="relative w-full max-w-[560px] aspect-[16/9]">
                 <img
                   src={border}
                   alt=""
@@ -58,93 +53,61 @@ export default function IntegrationCapabilities() {
                   draggable="false"
                 />
 
-                {/* External Services Label (CLICKABLE) */}
                 <button
                   type="button"
                   onClick={() => setOpenServices(true)}
-                  className="absolute z-30 left-[5%] top-[2%] w-[36%] sm:left-[6%] sm:top-[5%] sm:w-[32%] md:left-[6%] md:top-[5%] md:w-[30%]
-                             focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 rounded-md"
+                  className="group absolute z-30 left-[6%] top-[5%] w-[30%] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 rounded-md"
                   aria-label="Open External Services"
                 >
                   <img
                     src={externalServices}
                     alt="External Services"
-                    className="w-full object-contain"
+                    className="w-full object-contain transition-all duration-300 group-hover:scale-105 group-hover:-translate-y-1 group-hover:drop-shadow-[0_0_18px_rgba(0,180,255,0.6)]"
                     draggable="false"
                   />
                 </button>
 
-                {/* APIs icon + text (CLICKABLE) */}
                 <button
                   type="button"
                   onClick={() => setOpenServices(true)}
-                  className="absolute z-30 left-[-2%] top-[42%] sm:left-[-1%] sm:top-[44%] md:left-[-3%] md:top-[44%]
-                             flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 rounded-md px-1"
+                  className="group absolute z-30 left-[-3%] top-[44%] flex items-center gap-3 px-1 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 rounded-md"
                   aria-label="Open API Connectivity"
                 >
                   <img
                     src={apiIcon}
                     alt=""
-                    className="h-[20px] w-[20px] sm:h-[22px] sm:w-[22px] object-contain"
+                    className="h-[22px] w-[22px] object-contain transition-all duration-300 group-hover:scale-110"
                     draggable="false"
                   />
-                  <span className="text-white font-semibold tracking-wide text-[14px] sm:text-[16px]">
+                  <span className="text-white font-semibold tracking-wide text-[16px] transition-all duration-300 group-hover:text-cyan-300">
                     APIs
                   </span>
                 </button>
 
-                {/* Curved Arrow */}
                 <img
                   src={arrow}
                   alt=""
-                  className={[
-                    "absolute z-20 object-contain",
-                    // mobile (make arrow smaller)
-                    "left-[13%] top-[17%] w-[10%]",
-                    // >= sm
-                    "sm:left-[12%] sm:top-[19%]",
-                    // >= md
-                    "md:left-[12%] md:top-[18%]",
-                  ].join(" ")}
+                  className="absolute z-20 object-contain left-[12%] top-[18%] w-[10%]"
                   draggable="false"
                 />
 
-                {/* FMT Center Blob */}
                 <img
                   src={fmt}
                   alt="FMT"
-                  className={[
-                    "absolute z-10 object-contain -translate-x-1/2 -translate-y-1/2",
-                    // mobile (slightly smaller so it doesn't crush left labels)
-                    "left-1/2 top-1/2 w-[54%]",
-                    // >= sm
-                    "sm:w-[55%]",
-                    // >= md
-                    "md:w-[56%]",
-                  ].join(" ")}
+                  className="absolute z-10 object-contain -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-[56%]"
                   draggable="false"
                 />
 
-                {/* OMT pill overlapping FMT (CLICKABLE) */}
                 <button
                   type="button"
                   onClick={() => setOpenOMT(true)}
-                  className={[
-                    "absolute z-20 object-contain",
-                    // mobile
-                    "left-[55%] top-[64%] w-[22%]",
-                    // >= sm
-                    "sm:left-[60%] sm:top-[63%] sm:w-[21%]",
-                    // >= md
-                    "md:left-[60%] md:top-[63%] md:w-[20%]",
-                    "focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 rounded-full",
-                  ].join(" ")}
+                  className="group absolute z-20 left-[60%] top-[63%] w-[20%] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 rounded-full"
                   aria-label="Open OMT"
                 >
                   <img
                     src={omt}
                     alt="OMT"
-                    className="w-full object-contain"
+                    className="w-full object-contain transition-all duration-300 group-hover:scale-110 group-hover:-translate-y-1 group-hover:drop-shadow-[0_0_22px_rgba(0,255,255,0.7)]"
                     draggable="false"
                   />
                 </button>
@@ -154,7 +117,6 @@ export default function IntegrationCapabilities() {
         </div>
       </section>
 
-      {/* ✅ POPUPS */}
       <OMTPopup open={openOMT} onClose={() => setOpenOMT(false)} />
       <ServicesPopup open={openServices} onClose={() => setOpenServices(false)} />
     </>
