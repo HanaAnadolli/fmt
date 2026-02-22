@@ -61,7 +61,7 @@ export default function Header() {
           <img
             src={fmtLogo}
             alt="FMT Logo"
-            className="select-none w-[120px] sm:w-[140px] h-auto"
+            className="select-none w-[100px] sm:w-[120px] h-auto"
             draggable={false}
           />
         </NavLink>

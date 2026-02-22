@@ -7,7 +7,7 @@ import footerPeople from "../assets/footer-image.png";
 const Footer = () => {
   return (
     <footer className="bg-[#011A27] text-white overflow-hidden">
-      <div className="mx-auto max-w-[1300px] px-6">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-12 py-14 md:flex-row md:justify-between md:gap-10">
           
           {/* LEFT SIDE */}

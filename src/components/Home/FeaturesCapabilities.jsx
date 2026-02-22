@@ -55,7 +55,7 @@ const RIGHT = [
   },
   {
     title: "Alerts & Notifications",
-    body: "Stay informed with fully configurable alerts. Trigger notifications based on events, user preferences, or (in future versions) calculation-based rules, such as ratio thresholds or rating changes.",
+    body: "Stay informed with fully configurable alerts. Trigger notifications based on events, user preferences, or calculation-based rules, such as ratio thresholds or rating changes.",
     icon: icon8,
   },
   {
@@ -103,8 +103,8 @@ export default function FeaturesCapabilities() {
   const [openKey, setOpenKey] = useState(null);
 
   return (
-    <section className="py-14 md:py-16">
-      <div className="mx-auto max-w-[1200px] px-5 md:px-6">
+    <section className="relative overflow-hidden py-14 md:py-16">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="rounded-[22px] border border-[#E6EEF7] bg-white shadow-[0_6px_24px_rgba(15,23,42,0.06)]">
           {/* Header Section */}
           <div className="relative px-8 pt-10 md:px-12 md:pt-12">
@@ -169,8 +169,6 @@ export default function FeaturesCapabilities() {
                 </div>
               </div>
             </div>
-
-            <div className="mt-10 border-t border-[#E9EEF6]" />
           </div>
 
           {/* Features */}

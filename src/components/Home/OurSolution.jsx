@@ -3,8 +3,8 @@ import graphic from "../../assets/home/graphic.png";
 
 export default function OurSolution() {
   return (
-    <section className="py-12">
-      <div className="mx-auto max-w-7xl px-6">
+    <section className="relative overflow-hidden py-12">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-center gap-16 md:grid-cols-2 md:gap-24">
           
           {/* LEFT: Image */}
@@ -24,7 +24,7 @@ export default function OurSolution() {
             </h2>
 
             <p className="mt-6 max-w-xl text-lg leading-8 text-slate-600">
-              FMT (Financial Management Tool) is a semi or fully automated
+              FMT (Financial Management Tool) is an automated
               financial analysis tool designed to streamline and improve the
               financial analysis process. It supports a wide range of tasks,
               including financial spreading, industry specific credit rating

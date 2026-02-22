@@ -19,19 +19,27 @@ export default function HeroSection() {
             </h1>
 
             <p className="mt-6 text-base leading-7 text-slate-600 sm:text-lg">
-              Semi or fully automated financial analysis tool — from data
+              An automated financial analysis tool — from data
               spreading to credit ratings and portfolio insights, all in one
               tool.
             </p>
 
             <div className="mt-8">
-              <button className="group inline-flex items-center gap-3 rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800">
+              <button className="group inline-flex items-center gap-5 rounded-[1000px] bg-slate-900 pt-[10px] pr-[14px] pb-[10px] pl-[24px] text-base font-semibold text-white shadow-sm transition hover:bg-slate-800">
                 Learn more
-                <span className="grid h-9 w-9 place-items-center rounded-full bg-white text-slate-900 transition group-hover:scale-105">
-                  <svg width="18" height="18" viewBox="0 0 24 24">
+                <span className="grid h-10 w-10 place-items-center rounded-full bg-white text-slate-900 transition group-hover:scale-105">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
                     <path
-                      fill="currentColor"
-                      d="M13.2 12 8.2 7l1.4-1.4L16 12l-6.4 6.4L8.2 17l5-5Z"
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M13.2929 18.7071C12.9024 18.3166 12.9024 17.6834 13.2929 17.2929L17.5858 13L4 13C3.44772 13 3 12.5523 3 12C3 11.4477 3.44772 11 4 11L17.5858 11L13.2929 6.70711C12.9024 6.31658 12.9024 5.68342 13.2929 5.29289C13.6834 4.90237 14.3166 4.90237 14.7071 5.29289L20.7071 11.2929C21.0976 11.6834 21.0976 12.3166 20.7071 12.7071L14.7071 18.7071C14.3166 19.0976 13.6834 19.0976 13.2929 18.7071Z"
+                      fill="#0F172B"
                     />
                   </svg>
                 </span>

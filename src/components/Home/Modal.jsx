@@ -42,14 +42,14 @@ export default function Modal({ open, onClose, children }) {
 
       {/* Centering wrapper with real spacing */}
       <div className="relative h-full w-full overflow-y-auto">
-        <div className="min-h-full w-full flex items-center justify-center p-6 sm:p-10 md:p-12">
+        <div className="min-h-full w-full flex items-center justify-center p-6">
           {/* Modal Card */}
           <div
             ref={panelRef}
             tabIndex={-1}
             className="
               relative w-full
-              max-w-[980px]
+              max-w-[800px]
               rounded-[28px]
               bg-white
               shadow-[0_30px_90px_rgba(0,0,0,0.40)]
@@ -60,7 +60,7 @@ export default function Modal({ open, onClose, children }) {
             "
           >
             {/* Header (keeps close button aligned) */}
-            <div className="flex items-center justify-end px-5 sm:px-7 py-2">
+            <div className="flex items-center justify-end px-2 sm:px-7 py-2">
               <button
                 type="button"
                 onClick={() => onClose?.()}

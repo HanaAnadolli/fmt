@@ -6,6 +6,7 @@ import fmt from "../../assets/home/fmt.png";
 import omt from "../../assets/home/omt.png";
 import apiIcon from "../../assets/home/api-icon.png";
 import arrow from "../../assets/home/arrow.png";
+import bgLines from "../../assets/home/bg-lines.png";
 
 import OMTPopup from "./OMTPopup";
 import ServicesPopup from "./ServicesPopup";
@@ -16,8 +17,17 @@ export default function IntegrationCapabilities() {
 
   return (
     <>
-      <section className="py-12 bg-gradient-to-b from-[#001B29] to-[#00344F]">
-        <div className="mx-auto max-w-[1200px] px-6">
+      <section className="relative overflow-hidden py-12 bg-gradient-to-b from-[#001B29] to-[#00344F]">
+
+        {/* Background Lines PNG */}
+        <img
+          src={bgLines}
+          alt=""
+          className="absolute -top-2 right-40 w-[800px] pointer-events-none select-none"
+          draggable="false"
+        />
+
+        <div className="relative mx-auto max-w-[1200px] px-6">
           <div className="grid items-center gap-16 md:grid-cols-2">
             <div className="max-w-[600px] text-white">
               <h2 className="text-[40px] md:text-[46px] font-extrabold tracking-tight">
@@ -44,7 +54,7 @@ export default function IntegrationCapabilities() {
               </p>
             </div>
 
-            <div className="flex justify-center md:justify-end">
+            <div className="flex justify-center md:justify-end py-48">
               <div className="relative w-full max-w-[560px] aspect-[16/9]">
                 <img
                   src={border}
@@ -67,22 +77,17 @@ export default function IntegrationCapabilities() {
                   />
                 </button>
 
-                <button
-                  type="button"
-                  onClick={() => setOpenServices(true)}
-                  className="group absolute z-30 left-[-3%] top-[44%] flex items-center gap-3 px-1 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 rounded-md"
-                  aria-label="Open API Connectivity"
-                >
+                <div className="absolute z-30 left-[-3%] top-[44%] flex items-center gap-3 px-1">
                   <img
                     src={apiIcon}
                     alt=""
-                    className="h-[22px] w-[22px] object-contain transition-all duration-300 group-hover:scale-110"
+                    className="h-[22px] w-[22px] object-contain"
                     draggable="false"
                   />
-                  <span className="text-white font-semibold tracking-wide text-[16px] transition-all duration-300 group-hover:text-cyan-300">
+                  <span className="text-white font-semibold tracking-wide text-[16px]">
                     APIs
                   </span>
-                </button>
+                </div>
 
                 <img
                   src={arrow}
@@ -118,7 +123,10 @@ export default function IntegrationCapabilities() {
       </section>
 
       <OMTPopup open={openOMT} onClose={() => setOpenOMT(false)} />
-      <ServicesPopup open={openServices} onClose={() => setOpenServices(false)} />
+      <ServicesPopup
+        open={openServices}
+        onClose={() => setOpenServices(false)}
+      />
     </>
   );
 }
