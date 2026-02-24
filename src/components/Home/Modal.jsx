@@ -16,7 +16,6 @@ export default function Modal({ open, onClose, children }) {
     };
     window.addEventListener("keydown", onKeyDown);
 
-    // focus modal panel (helps with keyboard users)
     const t = setTimeout(() => panelRef.current?.focus(), 0);
 
     return () => {
@@ -34,15 +33,14 @@ export default function Modal({ open, onClose, children }) {
       <div
         className="absolute inset-0 bg-black/55 backdrop-blur-sm"
         onMouseDown={(e) => {
-          // close only when clicking the backdrop itself
           if (e.target === e.currentTarget) onClose?.();
         }}
         aria-hidden="true"
       />
 
-      {/* Centering wrapper with real spacing */}
+      {/* Centering wrapper */}
       <div className="relative h-full w-full overflow-y-auto">
-        <div className="min-h-full w-full flex items-center justify-center p-6">
+        <div className="min-h-full w-full flex items-center justify-center p-4">
           {/* Modal Card */}
           <div
             ref={panelRef}
@@ -54,31 +52,30 @@ export default function Modal({ open, onClose, children }) {
               bg-white
               shadow-[0_30px_90px_rgba(0,0,0,0.40)]
               ring-1 ring-black/5
-              overflow-hidden
               outline-none
               animate-[modalIn_180ms_ease-out]
+              p-4
             "
           >
-            {/* Header (keeps close button aligned) */}
-            <div className="flex items-center justify-end px-2 sm:px-7 py-2">
-              <button
-                type="button"
-                onClick={() => onClose?.()}
-                aria-label="Close"
-                className="
-                  h-10 w-10 rounded-full
-                  grid place-items-center
-                  text-black/70 hover:text-black
-                  hover:bg-black/5 active:bg-black/10
-                  transition
-                "
-              >
-                <span className="text-2xl leading-none">✕</span>
-              </button>
-            </div>
+            {/* X button positioned inside body */}
+            <button
+              type="button"
+              onClick={() => onClose?.()}
+              aria-label="Close"
+              className="
+                absolute top-4 right-4
+                h-10 w-10 rounded-full
+                grid place-items-center
+                text-black/70 hover:text-black
+                hover:bg-black/5 active:bg-black/10
+                transition
+              "
+            >
+              <span className="text-2xl leading-none">✕</span>
+            </button>
 
             {/* Content */}
-            <div className="px-6 sm:px-10 py-2 sm:py-4">
+            <div className="mt-6">
               {children}
             </div>
           </div>
