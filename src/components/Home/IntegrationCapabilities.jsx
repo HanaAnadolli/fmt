@@ -18,17 +18,22 @@ export default function IntegrationCapabilities() {
   return (
     <>
       <section className="relative overflow-hidden py-12 bg-gradient-to-b from-[#001B29] to-[#00344F]">
-
         {/* Background Lines PNG */}
         <img
           src={bgLines}
           alt=""
-          className="absolute -top-2 right-40 w-[800px] pointer-events-none select-none"
+          className="
+            absolute pointer-events-none select-none
+            -top-2 right-0
+            w-[520px] opacity-60
+            sm:w-[650px]
+            md:right-20 md:w-[800px] md:opacity-100
+          "
           draggable="false"
         />
 
         <div className="relative mx-auto max-w-[1200px] px-6">
-          <div className="grid items-center gap-16 md:grid-cols-2">
+          <div className="grid items-center gap-10 md:gap-16 md:grid-cols-2">
             <div className="max-w-[600px] text-white">
               <h2 className="text-[40px] md:text-[46px] font-extrabold tracking-tight">
                 Integration Capabilities
@@ -54,7 +59,8 @@ export default function IntegrationCapabilities() {
               </p>
             </div>
 
-            <div className="flex justify-center md:justify-end py-48">
+            {/* ✅ FIX: remove huge mobile padding; only add it on md+ if you really need it */}
+            <div className="flex justify-center md:justify-end py-6 sm:py-10 md:py-0">
               <div className="relative w-full max-w-[560px] aspect-[16/9]">
                 <img
                   src={border}
@@ -123,10 +129,7 @@ export default function IntegrationCapabilities() {
       </section>
 
       <OMTPopup open={openOMT} onClose={() => setOpenOMT(false)} />
-      <ServicesPopup
-        open={openServices}
-        onClose={() => setOpenServices(false)}
-      />
+      <ServicesPopup open={openServices} onClose={() => setOpenServices(false)} />
     </>
   );
 }

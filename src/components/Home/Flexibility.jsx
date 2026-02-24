@@ -34,7 +34,7 @@ export default function Flexibility() {
 
   return (
     <section className="py-20">
-      <div className="mx-auto max-w-[1200px] px-6">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center">
           <h2 className="text-[34px] md:text-[40px] font-extrabold tracking-tight text-[#0B1B33]">
