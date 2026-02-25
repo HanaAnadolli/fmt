@@ -44,13 +44,13 @@ export default function Automations() {
     []
   );
 
+  const graphics = [graphic1, graphic2, graphic3, graphic4];
+
   const [activeIndex, setActiveIndex] = useState(1);
   const toggle = (idx) => setActiveIndex(idx);
 
-  const graphics = [graphic1, graphic2, graphic3, graphic4];
-
-  // ✅ This is the fixed height for ANY active card
-  const ACTIVE_H = "h-[170px]"; // change to match Figma (e.g. h-[160px], h-[180px])
+  // ✅ Apply fixed active height ONLY on desktop (md+)
+  const ACTIVE_H_MD = "md:h-[170px]";
 
   return (
     <section className="py-20">
@@ -67,7 +67,6 @@ export default function Automations() {
               the entire financial analysis process, handling:
             </p>
 
-            {/* ✅ tight spacing like your screenshot */}
             <div className="mt-10 flex flex-col gap-4">
               {items.map((item, idx) => {
                 const isActive = idx === activeIndex;
@@ -80,17 +79,15 @@ export default function Automations() {
                     aria-expanded={isActive}
                     className={[
                       "w-full text-left rounded-xl transition-all duration-300",
-                      // ✅ only ACTIVE has fixed height (collapsed stays compact)
-                      isActive ? ACTIVE_H : "",
-                      // ✅ prevents text from changing height
-                      isActive ? "overflow-hidden" : "",
+                      // ✅ fixed height only on md+, mobile can expand (so image fits)
+                      isActive ? ACTIVE_H_MD : "",
+                      isActive ? "md:overflow-hidden" : "",
                       isActive
                         ? "bg-white border border-[#E6EEF7] p-6 shadow-sm"
                         : "bg-transparent border border-transparent p-3 hover:bg-white hover:border hover:border-[#E6EEF7] hover:shadow-sm",
                       "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1DA1F2]/40",
                     ].join(" ")}
                   >
-                    {/* make sure content behaves inside fixed height */}
                     <div className={isActive ? "h-full flex flex-col" : ""}>
                       <div className="flex items-start justify-between gap-4">
                         <div className="flex items-center gap-4">
@@ -129,20 +126,32 @@ export default function Automations() {
                       </div>
 
                       {isActive && (
-                        <p
-                          className="mt-4 text-[14px] leading-6 text-[#4B5B73] overflow-hidden"
-                          style={{
-                            display: "-webkit-box",
-                            WebkitLineClamp: 4, // ✅ change lines if you want (3/4/5)
-                            WebkitBoxOrient: "vertical",
-                          }}
-                        >
-                          {item.description}
-                        </p>
+                        <>
+                          <p
+                            className="mt-4 text-[14px] leading-6 text-[#4B5B73] md:overflow-hidden"
+                            style={{
+                              display: "-webkit-box",
+                              WebkitLineClamp: 4, // affects desktop mostly due to fixed height
+                              WebkitBoxOrient: "vertical",
+                            }}
+                          >
+                            {item.description}
+                          </p>
+
+                          {/* ✅ MOBILE ONLY: image inside the opened card */}
+                          <div className="mt-5 md:hidden">
+                            <img
+                              src={graphics[idx]}
+                              alt={`${item.title} graphic`}
+                              className="w-full object-contain"
+                              draggable="false"
+                            />
+                          </div>
+                        </>
                       )}
 
-                      {/* optional: keeps layout stable inside fixed height */}
-                      {isActive && <div className="flex-1" />}
+                      {/* keeps layout stable inside fixed height on desktop */}
+                      {isActive && <div className="hidden md:block flex-1" />}
                     </div>
                   </button>
                 );
@@ -150,7 +159,8 @@ export default function Automations() {
             </div>
           </div>
 
-          <div className="flex justify-center md:justify-end">
+          {/* ✅ DESKTOP ONLY: right-side image */}
+          <div className="hidden md:flex justify-center md:justify-end">
             <img
               key={graphics[activeIndex]}
               src={graphics[activeIndex]}
