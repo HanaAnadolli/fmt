@@ -85,7 +85,7 @@ function Row({ title, body, icon, open, onToggle }) {
           </span>
         </div>
 
-        <span className="text-[#2FA3E0] text-xl leading-none font-medium">
+        <span className="text-[#2FA3E0] text-2xl leading-none font-medium">
           {open ? "−" : "+"}
         </span>
       </button>
@@ -103,9 +103,11 @@ export default function FeaturesCapabilities() {
   const [openKey, setOpenKey] = useState(null);
 
   return (
-    <section className="relative overflow-hidden py-14 md:py-16">
+    // ✅ remove overflow-hidden so Ana can “float” above the card
+    <section id="features" className="relative py-14 md:py-16">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="rounded-[22px] border border-[#E6EEF7] bg-white shadow-[0_6px_24px_rgba(15,23,42,0.06)]">
+        {/* ✅ allow overflow */}
+        <div className="overflow-visible rounded-[22px] border border-[#E6EEF7] bg-white shadow-[0_6px_24px_rgba(15,23,42,0.06)]">
           {/* Header Section */}
           <div className="relative px-8 pt-10 md:px-12 md:pt-12">
             <div className="grid items-start gap-10 md:grid-cols-2">
@@ -127,16 +129,18 @@ export default function FeaturesCapabilities() {
 
               {/* Right Image + Bubble */}
               <div className="relative flex justify-center md:justify-end">
+                {/* wrapper must be relative for absolute bubble */}
                 <div className="relative w-full max-w-[420px] flex justify-center md:block">
-                  {/* Ana */}
+                  {/* ✅ Pull Ana up so she sits on top of the card */}
                   <img
                     src={ana}
                     alt="Ana"
-                    className="mx-auto md:ml-auto h-[230px] sm:h-[260px] md:h-[260px] w-auto object-contain"
+                    className="relative z-10 mx-auto md:ml-auto h-[300px] sm:h-[360px] md:h-[320px] w-auto object-contain -mt-10 sm:-mt-14 md:-mt-20"
+                    draggable="false"
                   />
 
-                  {/* ✅ Mobile bubble (right side of Ana) */}
-                  <div className="absolute right-[-35px] top-[30%] w-[160px] md:hidden">
+                  {/* ✅ Mobile bubble */}
+                  <div className="absolute right-[-35px] top-[30%] w-[160px] md:hidden z-20">
                     <div className="relative">
                       <img
                         src={bubble}
@@ -144,15 +148,15 @@ export default function FeaturesCapabilities() {
                         className="w-full h-20"
                       />
                       <div className="absolute inset-0 flex items-center justify-center px-4">
-                        <p className="text-[12px] text-[#24324A] font-semibold whitespace-nowrap">
+                        <p className="description-font text-[18px] text-[#24324A] font-bold whitespace-nowrap">
                           Hi, I am Ana
                         </p>
                       </div>
                     </div>
                   </div>
 
-                  {/* Desktop bubble */}
-                  <div className="absolute -right-8 top-5 hidden md:block">
+                  {/* ✅ Desktop bubble */}
+                  <div className="absolute -right-8 top-5 hidden md:block z-20">
                     <div className="relative w-[180px]">
                       <img
                         src={bubble}
@@ -160,7 +164,7 @@ export default function FeaturesCapabilities() {
                         className="w-full h-auto"
                       />
                       <div className="absolute inset-0 flex items-center justify-center px-6">
-                        <p className="text-[14px] text-[#24324A] font-semibold whitespace-nowrap">
+                        <p className="description-font text-[18px] text-[#24324A] font-bold whitespace-nowrap">
                           Hi, I am Ana
                         </p>
                       </div>

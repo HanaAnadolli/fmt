@@ -6,7 +6,6 @@ export default function HeroSection() {
     <section className="relative overflow-hidden">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-center gap-10 py-12 lg:grid-cols-2 lg:py-16 lg:min-h-[calc(100vh-86px)]">
-          
           {/* IMAGE — first on mobile, second on desktop */}
           <div className="relative flex items-center justify-center order-1 lg:order-2">
             <div className="relative w-[400px] sm:w-[400px] md:w-[500px] lg:w-[700px]">
@@ -39,7 +38,13 @@ export default function HeroSection() {
             </p>
 
             <div className="mt-8 flex justify-center lg:justify-start">
-              <button className="description-font group inline-flex items-center gap-5 rounded-[1000px] bg-slate-900 pt-[10px] pr-[14px] pb-[10px] pl-[24px] text-base font-semibold text-white shadow-sm transition hover:bg-slate-800">
+              <button
+                onClick={() => {
+                  const section = document.getElementById("features");
+                  section?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="description-font group inline-flex items-center gap-5 rounded-[1000px] bg-slate-900 pt-[10px] pr-[14px] pb-[10px] pl-[24px] text-base font-semibold text-white shadow-sm transition hover:bg-slate-800"
+              >
                 Learn more
                 <span className="grid h-10 w-10 place-items-center rounded-full bg-white text-slate-900 transition group-hover:scale-105">
                   <svg
@@ -60,7 +65,6 @@ export default function HeroSection() {
               </button>
             </div>
           </div>
-
         </div>
       </div>
     </section>
