@@ -37,11 +37,11 @@ export default function Flexibility() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center">
-          <h2 className="text-[34px] md:text-[40px] font-extrabold tracking-tight text-[#0B1B33]">
+          <h2 className="title-font text-[34px] md:text-[40px] font-extrabold tracking-tight text-[#0B1B33]">
             Flexibility, control, one platform
           </h2>
 
-          <p className="mx-auto mt-4 max-w-[820px] text-[15px] leading-7 text-[#4B5B73]">
+          <p className="description-font mx-auto mt-4 max-w-[820px] text-[15px] leading-7 text-[#4B5B73]">
             FMT is positioned as a <span className="font-semibold">highly versatile</span>{" "}
             solution, offering clients a combination of{" "}
             <span className="font-semibold">modularity</span>,{" "}
@@ -64,11 +64,11 @@ export default function Flexibility() {
                 />
               </div>
 
-              <h4 className="mt-6 text-[14px] font-bold text-[#0B1B33]">
+              <h4 className="description-font mt-6 text-[14px] font-bold text-[#0B1B33]">
                 {item.title}
               </h4>
 
-              <p className="mx-auto mt-3 max-w-[240px] text-[12px] leading-5 text-[#4B5B73]">
+              <p className="description-font mx-auto mt-3 max-w-[240px] text-[12px] leading-5 text-[#4B5B73]">
                 {item.text}
               </p>
             </div>

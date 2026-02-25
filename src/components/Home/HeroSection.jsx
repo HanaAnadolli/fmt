@@ -1,4 +1,5 @@
 import heroImage from "../../assets/home/hero-image.png";
+import "../../index.css";
 
 export default function HeroSection() {
   return (
@@ -20,11 +21,11 @@ export default function HeroSection() {
 
           {/* TEXT — second on mobile, first on desktop */}
           <div className="max-w-xl order-2 lg:order-1 :text-left">
-            <p className="text-sm font-bold tracking-wide text-sky-500">
+            <p className="description-font text-sm font-bold tracking-wide text-sky-500">
               Data. Insight. Action.
             </p>
 
-            <h1 className="mt-3 text-4xl font-extrabold leading-[1.05] text-slate-900 sm:text-5xl lg:text-6xl">
+            <h1 className="title-font mt-3 text-4xl font-extrabold leading-[1.05] text-slate-900 sm:text-5xl lg:text-6xl">
               Financial
               <br />
               Management
@@ -32,13 +33,13 @@ export default function HeroSection() {
               Tool
             </h1>
 
-            <p className="mt-6 text-base leading-7 text-slate-600 sm:text-lg">
+            <p className="description-font mt-6 text-base leading-7 text-slate-600 sm:text-lg">
               An automated financial analysis tool — from data spreading to
               credit ratings and portfolio insights, all in one tool.
             </p>
 
             <div className="mt-8 flex justify-center lg:justify-start">
-              <button className="group inline-flex items-center gap-5 rounded-[1000px] bg-slate-900 pt-[10px] pr-[14px] pb-[10px] pl-[24px] text-base font-semibold text-white shadow-sm transition hover:bg-slate-800">
+              <button className="description-font group inline-flex items-center gap-5 rounded-[1000px] bg-slate-900 pt-[10px] pr-[14px] pb-[10px] pl-[24px] text-base font-semibold text-white shadow-sm transition hover:bg-slate-800">
                 Learn more
                 <span className="grid h-10 w-10 place-items-center rounded-full bg-white text-slate-900 transition group-hover:scale-105">
                   <svg

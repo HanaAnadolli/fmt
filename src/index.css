@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=REM:wght@400;500;600;700;800&family=Noto+Sans:wght@400;500;600&display=swap');
+
 @import "tailwindcss";
 
 @theme {
@@ -14,4 +16,12 @@ html, body, #root {
 body.page-not-home,
 body.page-not-home #root {
   background-color: #E4E4E4;
+}
+
+.title-font {
+  font-family: "REM", sans-serif;
+}
+
+.description-font {
+  font-family: "Noto Sans", sans-serif;
 }

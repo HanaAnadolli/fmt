@@ -72,7 +72,7 @@ const RIGHT = [
 
 function Row({ title, body, icon, open, onToggle }) {
   return (
-    <div className="rounded-[2px] border border-[#CFEAFF] bg-white">
+    <div className="description-font rounded-[2px] border border-[#CFEAFF] bg-white">
       <button
         type="button"
         onClick={onToggle}
@@ -111,12 +111,12 @@ export default function FeaturesCapabilities() {
             <div className="grid items-start gap-10 md:grid-cols-2">
               {/* Left Text */}
               <div className="max-w-[640px]">
-                <h2 className="text-[40px] leading-[1.1] md:text-[46px] font-extrabold tracking-tight text-[#0B1B33]">
+                <h2 className="title-font text-[40px] leading-[1.1] md:text-[46px] font-extrabold tracking-tight text-[#0B1B33]">
                   FMT Features & <br />
                   Capabilities
                 </h2>
 
-                <p className="mt-6 max-w-[620px] text-[16px] leading-7 text-[#4B5B73]">
+                <p className="description-font mt-6 max-w-[620px] text-[16px] leading-7 text-[#4B5B73]">
                   FMT delivers a powerful suite of features designed to enhance
                   accuracy, efficiency, and flexibility in financial and credit
                   risk analysis. Every functionality is built to support

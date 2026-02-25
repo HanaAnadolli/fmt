@@ -17,11 +17,11 @@ export default function OurSolution() {
 
           {/* RIGHT: Text */}
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
+            <h2 className="title-font text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
               Our Solution
             </h2>
 
-            <p className="mt-6 max-w-xl text-lg leading-8 text-slate-600">
+            <p className="description-font mt-6 max-w-xl text-lg leading-8 text-slate-600">
               FMT (Financial Management Tool) is an automated
               financial analysis tool designed to streamline and improve the
               financial analysis process. It supports a wide range of tasks,

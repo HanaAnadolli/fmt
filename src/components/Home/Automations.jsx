@@ -57,11 +57,11 @@ export default function Automations() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-center gap-16 md:grid-cols-2">
           <div className="max-w-3xl">
-            <h2 className="text-[40px] md:text-[46px] font-extrabold tracking-tight text-[#0B1B33]">
+            <h2 className="title-font text-[40px] md:text-[46px] font-extrabold tracking-tight text-[#0B1B33]">
               Automations
             </h2>
 
-            <p className="mt-6 text-[16px] leading-7 text-[#4B5B73]">
+            <p className="description-font mt-6 text-[16px] leading-7 text-[#4B5B73]">
               FMT is powered by OMT (Operations Management Tool) allowing
               different types of automation, designed to streamline and elevate
               the entire financial analysis process, handling:

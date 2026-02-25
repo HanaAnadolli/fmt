@@ -35,20 +35,20 @@ export default function IntegrationCapabilities() {
         <div className="relative mx-auto max-w-[1200px] px-6">
           <div className="grid items-center gap-10 md:gap-16 md:grid-cols-2">
             <div className="max-w-[600px] text-white">
-              <h2 className="text-[40px] md:text-[46px] font-extrabold tracking-tight">
+              <h2 className="title-font text-[40px] md:text-[46px] font-extrabold tracking-tight text-white">
                 Integration Capabilities
               </h2>
 
-              <p className="mt-6 text-[16px] leading-7 text-white/80">
+              <p className="description-font mt-6 text-[16px] leading-7 text-[#F2FFFF]">
                 Advanced functionalities by seamless integration with other
                 Application Programming Interfaces (APIs).
               </p>
 
-              <h4 className="mt-12 text-[18px] font-semibold">
+              <h4 className="title-font mt-12 text-[18px] font-semibold text-[#F2FFFF]">
                 Customize FMT Capabilities to your Strategic Focus
               </h4>
 
-              <p className="mt-6 text-[15px] leading-7 text-white/75">
+              <p className="description-font mt-6 text-[15px] leading-7 text-[#9EC7DC]">
                 Optimize financial management and analysis in areas that align
                 directly with your operational priorities. Whether it is
                 automating financial spreading, enhancing credit rating
