@@ -50,7 +50,7 @@ export default function Automations() {
   const toggle = (idx) => setActiveIndex(idx);
 
   // ✅ Apply fixed active height ONLY on desktop (md+)
-  const ACTIVE_H_MD = "md:h-[170px]";
+  const ACTIVE_H_MD = "md:min-h-[190px]";
 
   return (
     <section className="py-20">
