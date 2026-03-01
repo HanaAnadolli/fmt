@@ -86,17 +86,17 @@ const Footer = () => {
             <div className="absolute left-[200px] top-[80px]">
               <h4 className="text-sm font-semibold tracking-wide">LEGAL</h4>
               <div className="mt-4 space-y-3 text-[16px] leading-6 text-white/75">
-                <Link to="/terms" className="block hover:text-white transition">
+                {/* <Link to="/terms" className="block hover:text-white transition">
                   Terms and Conditions
-                </Link>
+                </Link> */}
                 <Link
-                  to="/privacy"
+                  to="/legal-privacy"
                   className="block hover:text-white transition"
                 >
                   Privacy and Policy
                 </Link>
                 <Link
-                  to="/cookies"
+                  to="/legal-cookies"
                   className="block hover:text-white transition"
                 >
                   Cookies Policy

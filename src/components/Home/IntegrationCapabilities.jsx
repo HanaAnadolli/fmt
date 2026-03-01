@@ -60,8 +60,8 @@ export default function IntegrationCapabilities() {
             </div>
 
             {/* ✅ FIX: remove huge mobile padding; only add it on md+ if you really need it */}
-            <div className="flex justify-center md:justify-end py-6 sm:py-10 md:py-0">
-              <div className="relative w-full max-w-[560px] aspect-[16/9]">
+            <div className="flex justify-center md:justify-end py-6 sm:py-10 md:py-0 md:mt-12 lg:mt-40">
+              <div className="relative w-full max-w-[450px] aspect-[16/9]">
                 <img
                   src={border}
                   alt=""
