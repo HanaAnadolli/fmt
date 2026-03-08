@@ -6,28 +6,24 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const location = useLocation()
 
-  // close menu on route change
   useEffect(() => {
     setMenuOpen(false)
   }, [location.pathname])
 
-  // prevent background scroll
   useEffect(() => {
     if (!menuOpen) return
     const prev = document.body.style.overflow
     document.body.style.overflow = "hidden"
-    return () => (document.body.style.overflow = prev)
+    return () => {
+      document.body.style.overflow = prev
+    }
   }, [menuOpen])
 
-  // close on ESC
   useEffect(() => {
     const onKey = (e) => e.key === "Escape" && setMenuOpen(false)
     window.addEventListener("keydown", onKey)
     return () => window.removeEventListener("keydown", onKey)
   }, [])
-
-  const isHome = location.pathname === "/"
-  const headerBg = isHome ? "bg-transparent" : "bg-white"
 
   const base = "px-3 py-2 text-[19px] font-semibold relative group"
   const active = "text-primary"
@@ -54,19 +50,17 @@ export default function Header() {
   )
 
   return (
-    <header className={`relative w-full ${headerBg}`}>
+    <header className="absolute top-0 left-0 z-50 w-full bg-transparent">
       <div className="mx-auto flex h-[110px] max-w-7xl items-center px-6 sm:px-8 lg:px-10">
-        {/* Logo */}
         <NavLink to="/" className="flex items-center">
           <img
             src={fmtLogo}
             alt="FMT Logo"
-            className="select-none w-[60px] sm:w-[80px] h-auto"
+            className="select-none h-auto w-[60px] sm:w-[80px]"
             draggable={false}
           />
         </NavLink>
 
-        {/* Desktop nav */}
         <nav className="ml-auto hidden items-center gap-12 md:flex">
           <Item to="/" label="Home" end />
           <Item to="/about" label="About Us" />
@@ -74,24 +68,22 @@ export default function Header() {
           <Item to="/contact" label="Contact" />
         </nav>
 
-        {/* Mobile hamburger */}
         <button
           aria-label="Open menu"
           onClick={() => setMenuOpen(true)}
           className="ml-auto rounded-md p-3 text-slate-700 hover:text-primary md:hidden"
         >
           <span className="relative block h-6 w-7">
-            <span className="absolute top-0 left-0 h-[2px] w-7 bg-current" />
-            <span className="absolute top-[11px] left-0 h-[2px] w-7 bg-current" />
-            <span className="absolute top-[22px] left-0 h-[2px] w-7 bg-current" />
+            <span className="absolute left-0 top-0 h-[2px] w-7 bg-current" />
+            <span className="absolute left-0 top-[11px] h-[2px] w-7 bg-current" />
+            <span className="absolute left-0 top-[22px] h-[2px] w-7 bg-current" />
           </span>
         </button>
       </div>
 
-      {/* Overlay + Drawer */}
       <div
-        className={`fixed inset-0 z-[100] md:hidden transition-opacity ${
-          menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        className={`fixed inset-0 z-[100] transition-opacity md:hidden ${
+          menuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
         <div

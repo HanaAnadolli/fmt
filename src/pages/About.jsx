@@ -1,93 +1,34 @@
-import React, { useEffect, useRef } from "react";
 import Header from "../components/Header";
-import ContactSection from "../components/ContactSection";
-import Footer from "../components/Footer";
-import aboutVideo from "../assets/about/about-video.mp4";
-import ComingSoon from "../components/Home/ComingSoon";
-import { Link } from "react-router-dom";
+import vectorBg from "../assets/home/vector.png";
+import Designing from "../components/about/Designing";
+import Platforms from "../components/about/Platforms";
 
-const About = () => {
-  const videoRef = useRef(null);
-
-  useEffect(() => {
-    // Transparent header for this page
-    document.body.classList.add("header-transparent");
-    return () => document.body.classList.remove("header-transparent");
-  }, []);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const handleLoaded = () => {
-      video.playbackRate = 0.18; // ⬅️ slower & smoother than 0.25
-      video.play().catch(() => {});
-    };
-
-    video.addEventListener("loadeddata", handleLoaded);
-    return () => video.removeEventListener("loadeddata", handleLoaded);
-  }, []);
-
+export default function About() {
   return (
-    <div className="min-h-screen">
-      {/* Transparent Header */}
-      <Header transparent />
+    <div className="bg-[#F3FBFF] overflow-x-hidden">
+      {/* HERO */}
+      <section
+        className="relative w-full h-[450px]"
+        style={{
+          backgroundImage: `url(${vectorBg}), url(${vectorBg})`,
+          backgroundRepeat: "no-repeat, no-repeat",
+          backgroundPosition: "top center, top center",
+          backgroundSize: "100% 200px, 105% 240px",
+        }}
+      >
+        <Header />
 
-      {/* Hero with Video Background */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Video Background */}
-        <div className="absolute inset-0 w-full h-full">
-          <video
-            ref={videoRef}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            className="w-full h-full object-cover about-video"
-          >
-            <source src={aboutVideo} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-
-        {/* Content Overlay */}
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-6xl font-bold text-primary mb-6">
-            About us
+        <div className="mx-auto max-w-[1200px] px-6 pt-[200px]">
+          <h1 className="max-w-[700px] text-[56px] font-extrabold leading-[64px] text-[#011A27]">
+            Software built for <br />
+            financial operations
           </h1>
-          <p className="text-lg md:text-xl text-gray-800 leading-relaxed">
-            The Financial Management Tool (FMT) is developed by{" "}
-            <a
-              href="https://kstf.ch/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-bold text-primary underline underline-offset-4 hover:opacity-80"
-            >
-              KS-TF AG (KSTF)
-            </a>
-            .
-          </p>
         </div>
-
-        {/* Soft overlay for contrast */}
-        <div className="absolute inset-0 bg-white/10 pointer-events-none" />
       </section>
 
-      <ComingSoon />
-      <ContactSection />
-
-      {/* Local styles */}
-      <style>{`
-        .about-video{
-          mix-blend-mode: screen; /* black becomes transparent */
-          filter: brightness(1.15) contrast(1.05) saturate(1.1);
-          will-change: transform;
-          transform: translateZ(0);
-        }
-      `}</style>
+      {/* CONTENT */}
+      <Designing />
+      <Platforms />
     </div>
   );
-};
-
-export default About;
+}
