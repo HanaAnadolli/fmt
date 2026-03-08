@@ -4,7 +4,7 @@ import "../../index.css";
 export default function HeroSection() {
   return (
     <section className="relative overflow-hidden">
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-[150px]">
         <div className="grid items-center gap-10 py-12 lg:grid-cols-2 lg:py-16 lg:min-h-[calc(100vh-86px)]">
           {/* IMAGE — first on mobile, second on desktop */}
           <div className="relative flex items-center justify-center order-1 lg:order-2">
